@@ -21,7 +21,7 @@ sass:
   style: compressed
 
 # Site Data
-url: https//thinot4work.github.io
+url: https://thorpham.github.io/
 baseurl: # the subpath of your site, e.g. /blog
 title: Simple Texture
 description: "A gem-based responsive simple texture styled Jekyll theme."
