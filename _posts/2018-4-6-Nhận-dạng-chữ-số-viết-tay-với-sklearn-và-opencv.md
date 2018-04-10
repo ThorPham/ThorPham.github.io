@@ -73,7 +73,7 @@ for i in contours:
 cv2.waitKey()
 cv2.destroyAllWindows()
 ~~~
-![digitnopad](https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/screenshots/image_no_pand.jpg)
+![digitnopad](https://www.learnopencv.com/wp-content/uploads/2016/11/gradients.png)
 
 
 
