@@ -12,22 +12,22 @@ Hog(histogram of oriented gradient) và svm( support vector machine) để nhậ
 tìm hiểu về hog.
 #HOG là gì ?
 #Code python
-''
+~~~ ruby
 import cv2
 import numpy as np
 from skimage.feature import hog
 from sklearn.svm import LinearSVC
 from keras.datasets import mnist
 from sklearn.metrics import accuracy_score
-''
+~~~ 
 Load daset
-''
+~~~ ruby
 (X_train,y_train),(X_test,y_test) = mnist.load_data()
 
-''
-''
+~~~
 
-''
+
+~~~ ruby
 X_train_feature = []
 for i in range(len(X_train)):
     feature = hog(X_train[i],orientations=9,pixels_per_cell=(14,14),cells_per_block=(1,1))
@@ -39,23 +39,23 @@ for i in range(len(X_test)):
     feature = hog(X_test[i],orientations=9,pixels_per_cell=(14,14),cells_per_block=(1,1))
     X_test_feature.append(feature)
 X_test_feature = np.array(X_test_feature,dtype=np.float32)
-''
-''
+~~~
+~~~ ruby
 model = LinearSVC(C=10)
 model.fit(X_train_feature,y_train)
 y_pre = model.predict(X_test_feature)
 print(accuracy_score(y_test,y_pre))
-''
+~~~
 
-''
+~~~ ruby
 image = cv2.imread("test1.png")
 im_gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 im_blur = cv2.GaussianBlur(im_gray,(5,5),0)
 im,thre = cv2.threshold(im_blur,90,255,cv2.THRESH_BINARY_INV)
 _,contours,hierachy = cv2.findContours(thre,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 rects = [cv2.boundingRect(cnt) for cnt in contours]
-''
-''
+~~~
+~~~ ruby
 for i in contours:
     (x,y,w,h) = cv2.boundingRect(i)
     cv2.rectangle(image,(x,y),(x+w,y+h),(0,255,0),3)
@@ -71,4 +71,4 @@ for i in contours:
     cv2.imshow("image",image)
 cv2.waitKey()
 cv2.destroyAllWindows()
-''
+~~~
