@@ -75,7 +75,7 @@ cv2.destroyAllWindows()
 ~~~
 ![digitnopad](https://www.learnopencv.com/wp-content/uploads/2016/11/gradients.png)
 
-
+![smiley](https://kramdown.gettalong.org/overview.png)
 
 ![digit_pad](https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/screenshots/image_pand.jpg)
 
