@@ -73,7 +73,7 @@ for i in contours:
 cv2.waitKey()
 cv2.destroyAllWindows()
 ~~~
-![digit_nopad](https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/screenshots/image_no_pand.jpg)
-[kramdown]:https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/screenshots/image_no_pand.jpg
+![digitnopad](https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/screenshots/image_no_pand.jpg)
+[kramdown]:https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/screenshots/
 ![digit_pad](https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/screenshots/image_pand.jpg)
 
