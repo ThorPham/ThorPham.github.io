@@ -55,6 +55,7 @@ im,thre = cv2.threshold(im_blur,90,255,cv2.THRESH_BINARY_INV)
 _,contours,hierachy = cv2.findContours(thre,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 rects = [cv2.boundingRect(cnt) for cnt in contours]
 ~~~
+![digit](https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/screenshots/digit.jpg)
 ~~~ ruby
 for i in contours:
     (x,y,w,h) = cv2.boundingRect(i)
@@ -72,3 +73,6 @@ for i in contours:
 cv2.waitKey()
 cv2.destroyAllWindows()
 ~~~
+![digit_nopad](https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/screenshots/image_no_pand.jpg)
+![digit_pad](https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/screenshots/image_pand.jpg)
+
