@@ -17,7 +17,7 @@ Một số biển số xe lấy trên mạng .
 
 
 ![car](/assets/images/image1.jpg)
-1, Nhận diện được vị trí của biển số xe trên image
+##1, Nhận diện được vị trí của biển số xe trên image
 Ý tưởng sẽ là cố gắng chỉ giữa lại những edge có khẳn năng là biển số xe nhất và loại bỏ những thứ không cần thiết khác.
 ~~~ ruby
 im = cv2.imread("./car/IMG_0392.jpg")
@@ -65,4 +65,21 @@ for c in contours:
 * Tách contour ra khỏi image ta thu được hình bên dưới
 
 ![plate](/assets/images/plate.jpg)
+
+##2, Segmentation các kí tự trên biển số xe:
+Bước này đơn giản hơn bước 1 .Ý tưởng là lọc nhiều sau đó dùng contour để tách các character ra khỏi image.
+~~~ ruby
+roi_gray = cv2.cvtColor(roi,cv2.COLOR_BGR2GRAY)
+roi_blur = cv2.GaussianBlur(roi_gray,(3,3),1)
+ret,thre = cv2.threshold(roi_blur,120,255,cv2.THRESH_BINARY_INV)
+kerel3 = cv2.getStructuringElement(cv2.MORPH_RECT,(3,3))
+thre_mor = cv2.morphologyEx(thre,cv2.MORPH_DILATE,kerel3)
+_,cont,hier = cv2.findContours(thre_mor,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+~~~
+* Tương tự như bước 1 ta sẽ lọc nhiễu bằng cv2.GaussianBlur
+* Dùng cv2.THRESH_BINARY_INV đưa ảnh về trắng đen
+* Dùng cv2.MORPH_DILATE 
+* Cuối cùng tìm contour trên image. Kết quả như sau
+
+![contour](/assets/images/contour.jpg)
 
