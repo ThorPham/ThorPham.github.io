@@ -32,15 +32,15 @@ canny_image = cv2.Canny(thresh_image,250,255)
 kernel = np.ones((3,3), np.uint8)
 dilated_image = cv2.dilate(canny_image,kernel,iterations=1)
 ~~~
-* load image "cv2.imread"
-* Chuyển về ảnh xám "cv2.cvtColor"
-* Remove noise bằng cv2.bilateralFilter.Bilateral filter khác với các filter khác là nó kết hợp cả domain filters(linear filter) và
+* load image `cv2.imread`
+* Chuyển về ảnh xám `cv2.cvtColor`
+* Remove noise bằng `cv2.bilateralFilter.Bilateral` filter khác với các filter khác là nó kết hợp cả domain filters(linear filter) và
  range filter(gaussian filter). Mục đích là giảm noise và tăng edge(làm egde thêm sắc nhọn edges sharp).
- * Cân bằng lại histogram cv2.equalizeHist làm cho ảnh ko quá sáng hoặc tối 
+ * Cân bằng lại histogram `cv2.equalizeHist` làm cho ảnh ko quá sáng hoặc tối 
  * Morphogoly open ( open là erosion sau đó dilation) mục đích là giảm egde nhiễu , egde thật thêm sắc nhọn bằng cv2.morphologyEx sử dụng kerel 5x5
- * Xóa phông(background) không cần thiết bằng cv2.subtract(equal_histogram,morph_image)
- * Dùng threshold OTSU(làm việc rất tốt trong bimodel histogram) đưa ảnh về trắng đen tách biệt background và region interesting
- * Sử dụng thuật toán Canny để nhận biết egde bằng cv2.Canny
+ * Xóa phông(background) không cần thiết bằng `cv2.subtract(equal_histogram,morph_image)`
+ * Dùng threshold `OTSU`(làm việc rất tốt trong bimodel histogram) đưa ảnh về trắng đen tách biệt background và region interesting
+ * Sử dụng thuật toán Canny để nhận biết egde bằng `cv2.Canny`
  * Cuối cùng dilate để tăng sharp cho egde
  
  ![car1](/assets/images/car1.jpg)
@@ -59,9 +59,9 @@ for c in contours:
             screenCnt = approx
             break
 ~~~
-* Đầu tiên ta dùng cv2.findContours để tìm contour ( nó sẽ trả về 3 giá trị ta chỉ quan tâm giá trị thuws2 )
+* Đầu tiên ta dùng `cv2.findContours` để tìm contour ( nó sẽ trả về 3 giá trị ta chỉ quan tâm giá trị thuws2 )
 * Lọc contour theo area chỉ lấy 10 contour có giá trị lớn nhất( tránh lấy nhiều vì sẽ có nhiễu)
-* Tiếp theo ta tính chu vi của từng contour bẳng cv2.arcLength sau đó dùng cv2.approxPolyDP để xấp xỉ đa giác ở đây ta cần tìm là hình chữ nhật nên ta chỉ giữ lại contour nào có 4 cạnh .
+* Tiếp theo ta tính chu vi của từng contour bẳng cv2.arcLength sau đó dùng `cv2.approxPolyDP` để xấp xỉ đa giác ở đây ta cần tìm là hình chữ nhật nên ta chỉ giữ lại contour nào có 4 cạnh .
 * Tách contour ra khỏi image ta thu được hình bên dưới
 
 ![plate](/assets/images/plate.jpg)
@@ -83,7 +83,7 @@ _,cont,hier = cv2.findContours(thre_mor,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
 
 ![contour](/assets/images/contour.jpg)
 
-* Để ý sẽ có 7 charater trên plate mà ta cần lấy mà lại có một số contour nhiễu nên ta sẽ tính area của contour sau đó sorted và bỏ 2 contour đầu(vì ta dùng mode cv2.RETR_LIST nên sẽ có 1 contour bao toàn bộ image và 1 contour bao đường biên plate) và lấy 7 area lớn nhất.
+* Để ý sẽ có 7 charater trên plate mà ta cần lấy mà lại có một số contour nhiễu nên ta sẽ tính area của contour sau đó sorted và bỏ 2 contour đầu(vì ta dùng mode `cv2.RETR_LIST` nên sẽ có 1 contour bao toàn bộ image và 1 contour bao đường biên plate) và lấy 7 area lớn nhất.
 ~~~ ruby
 areas_ind = {}
 areas = []
@@ -102,3 +102,9 @@ plt.imshow(cv2.cvtColor(roi,cv2.COLOR_BGR2RGB))
 ## 3 : Nhận dạng : 
 Đến bước này chúng ta có thể dùng machine learning hoặc temple machine để nhận dạng các character. Nếu các bạn muốn tìm hiểu thêm vui lòng đọc lại bài viết nhận dạng chữ số viết tay.
 
+## Kết luận
+Chúng ta chỉ mới sử dụng image processing thuần túy để localizer and segmentation mà chưa dùng bất kỳ thuật toán nào cao siêu cả. Thế mới thấy image processing rất quan trọng trong lĩnh vực computer vision. Cách làm này chỉ áp dụng tốt khi camera đặt cố định khi đó ta có thể tinh chỉnh một số hàm để cho nó phù hợp với các trường hợp khác nhau. Tuy vậy nó cũng làm việc không tốt khi car có màu trắng trùng với màu của biến số. 
+### Tham khảo :
+https://www.pyimagesearch.com/
+https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_tutorials.html
+https://learndeltax.blogspot.com
