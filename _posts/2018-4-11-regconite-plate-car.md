@@ -17,4 +17,25 @@ Một số biển số xe lấy trên mạng .
 
 
 ![car](/assets/images/image1.jpg)
-
+1, Nhận diện được vị trí của biển số xe trên image
+Ý tưởng sẽ là cố gắng chỉ giữa lại những edge có khẳn năng là biển số xe nhất và loại bỏ những thứ không cần thiết khác.
+~~~ ruby
+im = cv2.imread("./car/IMG_0392.jpg")
+im_gray = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
+noise_removal = cv2.bilateralFilter(im_gray,9,75,75)
+equal_histogram = cv2.equalizeHist(noise_removal)
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(5,5))
+morph_image = cv2.morphologyEx(equal_histogram,cv2.MORPH_OPEN,kernel,iterations=20)
+sub_morp_image = cv2.subtract(equal_histogram,morph_image)
+ret,thresh_image = cv2.threshold(sub_morp_image,0,255,cv2.THRESH_OTSU)
+canny_image = cv2.Canny(thresh_image,250,255)
+kernel = np.ones((3,3), np.uint8)
+dilated_image = cv2.dilate(canny_image,kernel,iterations=1)
+~~~
+* load image cv2.imread
+* Chuyển về ảnh xám cv2.cvtColor
+* Remove noise bằng cv2.bilateralFilter.Bilateral filter khác với các filter khác là nó kết hợp cả domain filters(linear filter) và
+ range filter(gaussian filter). Mục đích là giảm noise và tăng edge(làm egde thêm sắc nhọn edges sharp).
+ * Cân bằng lại histogram cv2.equalizeHist làm cho ảnh ko quá sáng hoặc tối 
+ * Morphogoly open ( open là erosion sau đó dilation) mục đích là giảm egde nhiễu , egde thật thêm sắc nhọn bằng cv2.morphologyEx sử dụng kerel 5x5
+ *
