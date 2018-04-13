@@ -16,4 +16,5 @@ thuật này không đạt được hiểu quả cao vì sẽ có rất nhiều 
 Một số biển số xe lấy trên mạng .
 
 
-![car](https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/image1.jpg)
+![car](/assets/images/image1.jpg)
+
