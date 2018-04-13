@@ -43,6 +43,6 @@ dilated_image = cv2.dilate(canny_image,kernel,iterations=1)
  * Sử dụng thuật toán Canny để nhận biết egde bằng cv2.Canny
  * Cuối cùng dilate để tăng sharp cho egde
  
- ![car1](/assets/images/car1.png)
+ ![car1](/assets/images/car1.jpg)
  
- ![car2](/assets/images/car2.png)
+ ![car2](/assets/images/car2.jpg)
