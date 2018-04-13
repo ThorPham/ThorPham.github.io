@@ -14,4 +14,4 @@ Hai bước khó nhất là bước 1 và bước 2. Có một điểm chúng ta
 là tách biệt với nhau nên ta có thể dùng image procssing thông thường để lấy vị trí. Khác với những trường hợp nhận dạng realtime thì kỹ
 thuật này không đạt được hiểu quả cao vì sẽ có rất nhiều nhiễu và image có rất nhiều hình thái khác nhau( rotation,scale..) nên khuyến nghị dùng deep learning sẽ hiểu quả hơn.
 Một số biển số xe lấy trên mạng .
-![car]("https://photos.google.com/photo/AF1QipMDFt4K8ysrLsA-nNC_cSxwU6m3iGKAKu2LM0Q.jpg")
+![car]("https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/image1.jpg")
