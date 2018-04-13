@@ -42,5 +42,7 @@ dilated_image = cv2.dilate(canny_image,kernel,iterations=1)
  * Dùng threshold OTSU(làm việc rất tốt trong bimodel histogram) đưa ảnh về trắng đen tách biệt background và region interesting
  * Sử dụng thuật toán Canny để nhận biết egde bằng cv2.Canny
  * Cuối cùng dilate để tăng sharp cho egde
+ 
  ![car1](/assets/images/car1.png)
+ 
  ![car2](/assets/images/car2.png)
