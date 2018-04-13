@@ -106,6 +106,6 @@ plt.imshow(cv2.cvtColor(roi,cv2.COLOR_BGR2RGB))
 ## Kết luận
 Chúng ta chỉ mới sử dụng image processing thuần túy để localizer and segmentation mà chưa dùng bất kỳ thuật toán nào cao siêu cả. Thế mới thấy image processing rất quan trọng trong lĩnh vực computer vision. Cách làm này chỉ áp dụng tốt khi camera đặt cố định khi đó ta có thể tinh chỉnh một số hàm để cho nó phù hợp với các trường hợp khác nhau. Tuy vậy nó cũng làm việc không tốt khi car có màu trắng trùng với màu của biến số. 
 ### Tham khảo :
-https://www.pyimagesearch.com/
+https://www.pyimagesearch.com
 https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_tutorials.html
 https://learndeltax.blogspot.com
