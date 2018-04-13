@@ -32,8 +32,8 @@ canny_image = cv2.Canny(thresh_image,250,255)
 kernel = np.ones((3,3), np.uint8)
 dilated_image = cv2.dilate(canny_image,kernel,iterations=1)
 ~~~
-* load image 'cv2.imread'
-* Chuyển về ảnh xám 'cv2.cvtColor'
+* load image "cv2.imread"
+* Chuyển về ảnh xám "cv2.cvtColor"
 * Remove noise bằng cv2.bilateralFilter.Bilateral filter khác với các filter khác là nó kết hợp cả domain filters(linear filter) và
  range filter(gaussian filter). Mục đích là giảm noise và tăng edge(làm egde thêm sắc nhọn edges sharp).
  * Cân bằng lại histogram cv2.equalizeHist làm cho ảnh ko quá sáng hoặc tối 
