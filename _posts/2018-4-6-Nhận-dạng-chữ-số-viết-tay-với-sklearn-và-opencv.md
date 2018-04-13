@@ -77,5 +77,5 @@ cv2.destroyAllWindows()
 
 ![smiley](https://kramdown.gettalong.org/overview.png)
 
-![digit_pad](https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/screenshots/image_pand.jpg)
+![digit_pad](https://github.com/ThorPham/thorpham.github.io/blob/master/assets/images/image1.jpg)
 
