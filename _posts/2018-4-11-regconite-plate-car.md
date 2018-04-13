@@ -46,3 +46,22 @@ dilated_image = cv2.dilate(canny_image,kernel,iterations=1)
  ![car1](/assets/images/car1.jpg)
  
  ![car2](/assets/images/car2.jpg)
+ 
+Đến đây ta thấy image của chúng ta đã tách được các egde ra khỏi image ban đầu. Để ý là biển số xe có hình chữ nhật nên ta sẽ dùng contour để lấy nó ra khỏi image.
+~~~ ruby
+new,contours, hierarchy = cv2.findContours(dilated_image, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+contours= sorted(contours, key = cv2.contourArea, reverse = True)[:10]
+screenCnt = None
+for c in contours:
+    peri = cv2.arcLength(c, True)
+    approx = cv2.approxPolyDP(c, 0.06 * peri, True) 
+    if len(approx) == 4:
+            screenCnt = approx
+            break
+~~~
+* Đầu tiên ta dùng cv2.findContours để tìm contour ( nó sẽ trả về 3 giá trị ta chỉ quan tâm giá trị thuws2 )
+* Lọc contour theo area chỉ lấy 10 contour có giá trị lớn nhất( tránh lấy nhiều vì sẽ có nhiễu)
+* Tiếp theo ta tính chu vi của từng contour bẳng cv2.arcLength sau đó dùng cv2.approxPolyDP để xấp xỉ đa giác ở đây ta cần tìm là hình chữ nhật nên ta chỉ giữ lại contour nào có 4 cạnh .
+* Tách contour ra khỏi image ta thu được hình bên dưới
+![plate](assets/images/plate.jpg)
+
