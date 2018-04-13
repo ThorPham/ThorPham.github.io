@@ -63,5 +63,6 @@ for c in contours:
 * Lọc contour theo area chỉ lấy 10 contour có giá trị lớn nhất( tránh lấy nhiều vì sẽ có nhiễu)
 * Tiếp theo ta tính chu vi của từng contour bẳng cv2.arcLength sau đó dùng cv2.approxPolyDP để xấp xỉ đa giác ở đây ta cần tìm là hình chữ nhật nên ta chỉ giữ lại contour nào có 4 cạnh .
 * Tách contour ra khỏi image ta thu được hình bên dưới
-![plate](assets/images/plate.jpg)
+
+![plate](/assets/images/plate.jpg)
 
