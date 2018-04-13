@@ -59,7 +59,7 @@ for c in contours:
             screenCnt = approx
             break
 ~~~
-* Đầu tiên ta dùng `cv2.findContours` để tìm contour ( nó sẽ trả về 3 giá trị ta chỉ quan tâm giá trị thuws2 )
+* Đầu tiên ta dùng `cv2.findContours` để tìm contour ( nó sẽ trả về 3 giá trị ta chỉ quan tâm giá trị thứ 2 )
 * Lọc contour theo area chỉ lấy 10 contour có giá trị lớn nhất( tránh lấy nhiều vì sẽ có nhiễu)
 * Tiếp theo ta tính chu vi của từng contour bẳng cv2.arcLength sau đó dùng `cv2.approxPolyDP` để xấp xỉ đa giác ở đây ta cần tìm là hình chữ nhật nên ta chỉ giữ lại contour nào có 4 cạnh .
 * Tách contour ra khỏi image ta thu được hình bên dưới
