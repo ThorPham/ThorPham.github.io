@@ -7,9 +7,9 @@ tags: [random, jekyll]
 ---
 Nhận dạng biển số xe chắc không còn xa lạ đối với chúng ta, hàng ngày đi gửi xe ở các chung cư hay trung tâm thương mại chúng ta đều có thể nhìn thấy một anh bảo vệ ngồi gần một chiếc máy tính soi đi soi lại trên màn hình cái gì đó, đôi khi bảo chúng ta tắt đèn xe mà chúng ta chẳng hiểu để làm gì. Thực ra là có 1 camera ở phía sau chụp lại biển số xe của chúng ta. Anh ta đang xem lại ảnh trên máy tính có mờ hay nhiễu gì không để máy tính có thể nhận dạng được các con số trên biển số xe của chúng ta. Trong bài này chúng ta sẽ tìm hiểu cách mà máy tính có thể nhận dạng được các con số hay chữ cái. Có rất nhiều phương pháp và thuật toán có thể giải quyết được vấn đề này từ những thuật toán machine learning hay những thuật toán hiện đại hơn là CNN + RNN trong deep learning.
 Các bước thực hiện :
-1, Nhận diện được vị trí của biển số xe trên image ( Object Localization)
-2, Segmentation các kí tự trên biển số xe
-3, Nhận dạng
+## 1, Nhận diện được vị trí của biển số xe trên image ( Object Localization)
+## 2, Segmentation các kí tự trên biển số xe
+## 3, Nhận dạng
 Hai bước khó nhất là bước 1 và bước 2. Có một điểm chúng ta cần lưu ý là ở đây là camera đã đặt cố định và các character trên biển số xe
 là tách biệt với nhau nên ta có thể dùng image procssing thông thường để lấy vị trí. Khác với những trường hợp nhận dạng realtime thì kỹ
 thuật này không đạt được hiểu quả cao vì sẽ có rất nhiều nhiễu và image có rất nhiều hình thái khác nhau( rotation,scale..) nên khuyến nghị dùng deep learning sẽ hiểu quả hơn.
@@ -17,7 +17,7 @@ Một số biển số xe lấy trên mạng .
 
 
 ![car](/assets/images/image1.jpg)
-##1, Nhận diện được vị trí của biển số xe trên image
+## 1, Nhận diện được vị trí của biển số xe trên image
 Ý tưởng sẽ là cố gắng chỉ giữa lại những edge có khẳn năng là biển số xe nhất và loại bỏ những thứ không cần thiết khác.
 ~~~ ruby
 im = cv2.imread("./car/IMG_0392.jpg")
@@ -32,8 +32,8 @@ canny_image = cv2.Canny(thresh_image,250,255)
 kernel = np.ones((3,3), np.uint8)
 dilated_image = cv2.dilate(canny_image,kernel,iterations=1)
 ~~~
-* load image cv2.imread
-* Chuyển về ảnh xám cv2.cvtColor
+* load image 'cv2.imread'
+* Chuyển về ảnh xám 'cv2.cvtColor'
 * Remove noise bằng cv2.bilateralFilter.Bilateral filter khác với các filter khác là nó kết hợp cả domain filters(linear filter) và
  range filter(gaussian filter). Mục đích là giảm noise và tăng edge(làm egde thêm sắc nhọn edges sharp).
  * Cân bằng lại histogram cv2.equalizeHist làm cho ảnh ko quá sáng hoặc tối 
@@ -66,7 +66,7 @@ for c in contours:
 
 ![plate](/assets/images/plate.jpg)
 
-##2, Segmentation các kí tự trên biển số xe:
+## 2, Segmentation các kí tự trên biển số xe:
 Bước này đơn giản hơn bước 1 .Ý tưởng là lọc nhiều sau đó dùng contour để tách các character ra khỏi image.
 ~~~ ruby
 roi_gray = cv2.cvtColor(roi,cv2.COLOR_BGR2GRAY)
@@ -82,4 +82,23 @@ _,cont,hier = cv2.findContours(thre_mor,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
 * Cuối cùng tìm contour trên image. Kết quả như sau
 
 ![contour](/assets/images/contour.jpg)
+
+* Để ý sẽ có 7 charater trên plate mà ta cần lấy mà lại có một số contour nhiễu nên ta sẽ tính area của contour sau đó sorted và bỏ 2 contour đầu(vì ta dùng mode cv2.RETR_LIST nên sẽ có 1 contour bao toàn bộ image và 1 contour bao đường biên plate) và lấy 7 area lớn nhất.
+~~~ ruby
+areas_ind = {}
+areas = []
+for ind,cnt in enumerate(cont) :
+    area = cv2.contourArea(cnt)
+    areas_ind[area] = ind
+    areas.append(area)
+ areas = sorted(areas,reverse=True)[2:9]
+ for i in areas:
+    (x,y,w,h) = cv2.boundingRect(cont[areas_ind[i]])
+    cv2.rectangle(roi,(x,y),(x+w,y+h),(0,255,0),2)
+plt.imshow(cv2.cvtColor(roi,cv2.COLOR_BGR2RGB))
+~~~
+![final](/assets/images/final.jpg)
+
+## 3 : Nhận dạng : 
+Đến bước này chúng ta có thể dùng machine learning hoặc temple machine để nhận dạng các character. Nếu các bạn muốn tìm hiểu thêm vui lòng đọc lại bài viết nhận dạng chữ số viết tay.
 
