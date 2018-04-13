@@ -1,5 +1,7 @@
 ---
 layout: post
+published: false
+
 title: "Hello World!"
 description: "The first 'Hello world' post for Simple Texture theme."
 categories: [uncategorized]
