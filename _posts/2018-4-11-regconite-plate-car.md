@@ -13,7 +13,8 @@ Các bước thực hiện :
 Hai bước khó nhất là bước 1 và bước 2. Có một điểm chúng ta cần lưu ý là ở đây là camera đã đặt cố định và các character trên biển số xe
 là tách biệt với nhau nên ta có thể dùng image procssing thông thường để lấy vị trí. Khác với những trường hợp nhận dạng realtime thì kỹ
 thuật này không đạt được hiểu quả cao vì sẽ có rất nhiều nhiễu và image có rất nhiều hình thái khác nhau( rotation,scale..) nên khuyến nghị dùng deep learning sẽ hiểu quả hơn.
-Một số biển số xe lấy trên mạng .
+
+*Một số biển số xe lấy trên mạng .
 
 
 ![car](/assets/images/image1.jpg)
