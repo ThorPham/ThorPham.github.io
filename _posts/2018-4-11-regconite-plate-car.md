@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Nhận dạng biển số xe với opencv"
+title: "Nhận dạng biển số xe với opencv step by step"
 description: "nhận dạng biển số xe bằng image processing"
 categories: [OpenCV]
 tags: [python,opencv]
