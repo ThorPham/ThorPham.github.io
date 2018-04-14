@@ -44,7 +44,7 @@ def hog_feature(image):
     cells_per_block=(2,2),block_norm="L2")
     return feature_hog
     
-# feature extraction for image pos    
+#feature extraction for image pos    
 X_pos = []
 y_pos = []
 for path in path_pos :
@@ -53,7 +53,7 @@ for path in path_pos :
     X_pos.append(im_feature)
     y_pos.append(1)
     
-# feature extraction for image neg
+#feature extraction for image neg
 X_neg = []
 y_neg = []
 w = 64
