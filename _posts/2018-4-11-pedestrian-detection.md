@@ -33,5 +33,56 @@ for i in range(6):
 # image negative
 path_neg = glob.glob("./pedestrians_neg/"+"*.jpg")
 ~~~
-
+* Dữ liệu của ta gồm có 924 image pos có chiều (128, 64, 3) và ta sẽ tạo (15x50) image neg có chiều (128, 64, 3)
 ![pedestrian](/assets/images/pedestian1.jpg)
+# 2,Trích chọn đặc trưng 
+Ta sẽ dùng hog để trích chọn đặc trưng
+~~~ ruby
+def hog_feature(image):
+    feature_hog = hog(image,orientations=9,pixels_per_cell=(8,8),cells_per_block=(2,2),block_norm="L2")
+    return feature_hog
+    
+# feature extraction for image pos    
+X_pos = []
+y_pos = []
+for path in path_pos :
+    im = io.imread(path,as_grey=True)
+    im_feature = hog_feature(im)
+    X_pos.append(im_feature)
+    y_pos.append(1)
+    
+# feature extraction for image neg
+X_neg = []
+y_neg = []
+w = 64
+h = 128
+for path in path_neg :
+    im = io.imread(path,as_grey=True)
+    for j in range(15):
+        x = np.random.randint(0,im.shape[1]-w)
+        y = np.random.randint(0,im.shape[0]-h)
+        im_crop = im[y:y+h,x:x+w]
+        im_feature = hog_feature(im_crop)
+        X_neg.append(im_feature)
+        y_neg.append(-1)
+        
+~~~
+* Đầu tiên ta định nghĩa 1 function tính hog gồm các tham số `orientations=9,pixels_per_cell=(8,8),cells_per_block=(2,2),block_norm="L2"`
+* Sau đó tính hog trên pos và neg sample
+* Cuối cùng ta stack pos và neg lại để chuẩn bị training
+~~~ ruby
+X_pos = np.array(X_pos)
+X_neg = np.array(X_neg)
+X_train = np.concatenate((X_pos,X_neg))
+y_pos = np.array(y_pos)
+y_neg = np.array(y_neg)
+y_train = np.concatenate((y_pos,y_neg))
+~~~
+* Dữ liệu trining gồm có `X_traing` có shape (1674, 3780) gồm 1674 image và 3780 feature, `y_training` có shape là (1674,) gồm 2 giá trị 1 là pedestrian và 0 là non-pedestrian
+
+# 3,Build model
+
+
+
+
+
