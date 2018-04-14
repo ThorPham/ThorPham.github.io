@@ -37,9 +37,11 @@ path_neg = glob.glob("./pedestrians_neg/"+"*.jpg")
 ![pedestrian](/assets/images/pedestian1.jpg)
 # 2,Trích chọn đặc trưng 
 Ta sẽ dùng hog để trích chọn đặc trưng
+
 ~~~ ruby
 def hog_feature(image):
-    feature_hog = hog(image,orientations=9,pixels_per_cell=(8,8),cells_per_block=(2,2),block_norm="L2")
+    feature_hog = hog(image,orientations=9,pixels_per_cell=(8,8),
+    cells_per_block=(2,2),block_norm="L2")
     return feature_hog
     
 # feature extraction for image pos    
