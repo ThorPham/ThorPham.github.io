@@ -21,7 +21,7 @@ Cách bước thực hiện ta chia làm 2 giai đoạn tương ứng với clas
 3, Detecter
 # Giai đoạn 1 classifier
 1, Chuẩn bị dữ liệu
-Dữ liệu chúng ta cần chuẩn bị gồm 2 phần . Một là positive sample ( gọi tắt là pos) là data pedestrian và chúng ta gắn label cho nó là 1. Thứ hai là negative sample (Neg) là dữ liệu không chứa pedestrian bạn có thể lấy như background, car, house ... và ta gắn nhãn là 0.(lưu ý nếu training trong opecv thì nhãn gắn bắt buộc là 1 và -1 ).
+Dữ liệu chúng ta cần chuẩn bị gồm 2 phần . Một là positive sample ( gọi tắt là pos) là data pedestrian và chúng ta gắn label cho nó là 1. Thứ hai là negative sample (Neg) là dữ liệu không chứa pedestrian bạn có thể lấy như background, car, house ... và ta gắn nhãn là -1.(lưu ý nếu training trong opecv thì nhãn gắn bắt buộc là 1 và -1 ).
 ~~~ ruby
 # image positive
 path_pos = glob.glob("./pedestrians128x64/"+"*.ppm")
@@ -80,7 +80,7 @@ y_pos = np.array(y_pos)
 y_neg = np.array(y_neg)
 y_train = np.concatenate((y_pos,y_neg))
 ~~~
-* Dữ liệu trining gồm có `X_traing` có shape (1674, 3780) gồm 1674 image và 3780 feature, `y_training` có shape là (1674,) gồm 2 giá trị 1 là pedestrian và 0 là non-pedestrian
+* Dữ liệu trining gồm có `X_traing` có shape (1674, 3780) gồm 1674 image và 3780 feature, `y_training` có shape là (1674,) gồm 2 giá trị 1 là pedestrian và -1 là non-pedestrian
 
 # 3,Build model
 
