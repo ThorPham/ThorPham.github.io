@@ -67,4 +67,5 @@ for name in range(len(list_name)):
   * Mình cho nó chạy tầm 2 tiếng thu được tầm 6000 comment và được lưu dưới dạng text
   
   ![text](/assets/images/text.jpg)
-    
+  
+   ![text1](/assets/images/text1.jpg) 
