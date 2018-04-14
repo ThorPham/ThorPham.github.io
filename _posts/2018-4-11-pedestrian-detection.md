@@ -186,11 +186,11 @@ image = cv2.imread("pedestrian.jpg")
 image_test = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 
 window_size = (64,128)
-step_size = (5,5)
+step_size = (10,10)
 detections = []
 downscale=1.5
 scale = 0
-for image_scale in pyramid_gaussian(image_test,downscale=1.5):
+for image_scale in pyramid_gaussian(image_test,downscale=2):
     scale += 1
     if image_scale.shape[0] < window_size[1] or image_scale.shape[1] < window_size[0]:
         break
@@ -207,6 +207,7 @@ cv2.imshow("roi",image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 ~~~
-![output](](/assets/images/final1.jpg)
+![output](/assets/images/final1.jpg)
 
+![output](/assets/images/final2.jpg)
 
