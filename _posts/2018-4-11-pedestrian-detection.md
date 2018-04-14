@@ -3,10 +3,26 @@ layout: post
 title: "Nhận diện pedestrian với window search"
 description: "kết hợp hog ,svm với window search"
 categories: [demo]
-tags: [demo, jekyll]
+tags: [python,machine learning]
 redirect_from:
   - /2018/04/11/
 ---
+Object regconite bao gồm 2 phần việc đó là object classifier và  object detecter. Hiểu một cách đơn giản đó là nếu chúng ta muốn máy tính nhận dạng được con mèo hay con chó thì trước tiên nó sẽ phải detecter đối tượng đó trên image và sau đó xem đối tượng đó là cái gì bằng cách classifier .Với sự phát triển của deep learning như hiện nay đã có rất nhiều thuật toán giúp ta giải quyết vấn đề này như R-CNN,Fast or Faster RCNN,YOLO hay SSD với tốc độ xử lý nhanh và độ chính xác cao. Tuy vậy những cách truyền thống vẫn là sự lựa chon tốt khi mà chúng ta có ít dữ liệu và muốn build một model nào đó đơn giản hơn những cái phức tạp hơn như deep learning. Trong bài này chúng ta sẽ nhận diện pedestrian bằng phương pháp cổ điển trong computer vision và sau đó bạn có thể tự build một model custom nào đó theo ý của bạn .
+
+Cách bước thực hiện ta chia làm 2 giai đoạn tương ứng với classifier và detecter :
+* Giai đoạn 1 classifier
+1, Chuẩn bị dữ liệu
+2,Trích chọn đặc trưng
+3,Build model
+4,Đánh giá và cải thiện model
+* Gia đoạn 2  Detecter
+1, Xây dựng sliding window
+2, Xây dựng NMS(non-maxinum-suppression)
+3, Detecter
+
+
+
+
 ~~~ ruby
 import numpy as np
 import cv2
