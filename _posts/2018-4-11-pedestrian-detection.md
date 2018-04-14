@@ -97,6 +97,6 @@ print(classification_report(y_train,y_predict))
 ![confustion_matrix](/assets/images/confustion_matrix.jpg)
 
 * Amazing! kết quả accuracy = 100% . Quá cao phải ko. Nhưng đừng mừng vội vì data của chúng ta rất nhỏ và ta dùng toàn bộ data vào training mà ko chia ra data testing nên rất có thể bị overfiting. Khi đó model đưa vào hoạt động sẽ predict không tốt. Để tránh điều này
-ta có thể thay đổi threshold để làm tăng precission ( vì khi predict trên image lớn sẽ có rất nhiều non-pedestrian và khi đó data của chúng ta sẽ unbalance )
+ta có thể thay đổi threshold để làm tăng recall ( vì khi predict trên image lớn sẽ có rất nhiều non-pedestrian và khi đó data của chúng ta sẽ unbalance )
 
 
