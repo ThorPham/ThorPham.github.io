@@ -179,3 +179,34 @@ def nms(detections,threshold =0.4):
     return new_detections
 ~~~
 * Ý tưởng là chúng ta sẽ sort các detection theo score( decision_function) theo thứ tự giảm dần. Sau đó so sánh các detection với nhau, nếu area overlap hơn threshold thì ta sẽ giữ lại detection nào có score lớn hơn.
+## 3, Detecter
+* Single object trên mỗi image
+~~~ ruby
+image = cv2.imread("pedestrian.jpg")
+image_test = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+
+window_size = (64,128)
+step_size = (5,5)
+detections = []
+downscale=1.5
+scale = 0
+for image_scale in pyramid_gaussian(image_test,downscale=1.5):
+    scale += 1
+    if image_scale.shape[0] < window_size[1] or image_scale.shape[1] < window_size[0]:
+        break
+    for (x,y,roi) in sliding_window(image_scale,window_size,step_size):
+        feature = hog_feature(roi)
+        predict = model.predict(feature.reshape((-1,3780)))
+        score = model.decision_function(feature.reshape((-1,3780)))
+        if (predict == 1) and (score>0.5):
+            detections.append([x,y,np.round(score,4),window_size[0],window_size[1]])
+detections = nms(detections,0.5)
+for (x,y,_,w,h) in detections :
+    cv2.rectangle(image,(x,y),(x+w,y+h),(0,255,0),3)
+cv2.imshow("roi",image)
+cv2.waitKey()
+cv2.destroyAllWindows()
+~~~
+![output](](/assets/images/final1.jpg)
+
+
