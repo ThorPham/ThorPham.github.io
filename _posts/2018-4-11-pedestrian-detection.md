@@ -83,8 +83,20 @@ y_train = np.concatenate((y_pos,y_neg))
 * Dữ liệu trining gồm có `X_traing` có shape (1674, 3780) gồm 1674 image và 3780 feature, `y_training` có shape là (1674,) gồm 2 giá trị 1 là pedestrian và -1 là non-pedestrian
 
 # 3,Build model
+Chúng ta sẽ training model bằng thuật toán svm có trong thư viện sklearn.
+~~~ ruby
+from sklearn.svm import LinearSVC
+from sklearn.metrics import classification_report
+model = LinearSVC(C=0.01)
+model.fit(X_train,y_train)
+y_predict = model.predict(X_train)
+print(classification_report(y_train,y_predict))
+~~~
+* Kết quả như sau :
 
+![confustion_matrix](/assets/images/confustion_matrix.jpg)
 
-
+* Amazing! kết quả accuracy = 100% . Quá cao phải ko. Nhưng đừng mừng vội vì data của chúng ta rất nhỏ và ta dùng toàn bộ data vào training mà ko chia ra data testing nên rất có thể bị overfiting. Khi đó model đưa vào hoạt động sẽ predict không tốt. Để tránh điều này
+ta có thể thay đổi threshold để làm tăng precission ( vì khi predict trên image lớn sẽ có rất nhiều non-pedestrian và khi đó data của chúng ta sẽ unbalance )
 
 
