@@ -15,7 +15,7 @@ Cách bước thực hiện ta chia làm 2 giai đoạn tương ứng với clas
 2,Trích chọn đặc trưng
 3,Build model
 4,Đánh giá và cải thiện model
-* Gia đoạn 2  Detecter
+* Giai đoạn 2  Detecter
 1, Xây dựng sliding window
 2, Xây dựng NMS(non-maxinum-suppression)
 3, Detecter
@@ -97,6 +97,84 @@ print(classification_report(y_train,y_predict))
 ![confustion_matrix](/assets/images/confustion_matrix.jpg)
 
 * Amazing! kết quả accuracy = 100% . Quá cao phải ko. Nhưng đừng mừng vội vì data của chúng ta rất nhỏ và ta dùng toàn bộ data vào training mà ko chia ra data testing nên rất có thể bị overfiting. Khi đó model đưa vào hoạt động sẽ predict không tốt. Để tránh điều này
-ta có thể thay đổi threshold để làm tăng recall ( vì khi predict trên image lớn sẽ có rất nhiều non-pedestrian và khi đó data của chúng ta sẽ unbalance )
+ta có thể thay đổi threshold  ( vì khi predict trên image lớn sẽ có rất nhiều non-pedestrian hơn là pedestrian).Ở trong sklearn mặc định `model.prediction` là 0.5 nên ta không thể nào thay đổi được nó. Ta chỉ có thể thay đổi qua `decision_function`
+~~~ ruby
+from sklearn.metrics import precision_recall_curve
+from sklearn.model_selection import cross_val_predict
+y_scores = cross_val_predict(model, X_train, y_train, cv=3,
+                             method="decision_function")[:,1]
+precisions, recalls, thresholds = precision_recall_curve(y_train, y_scores)
 
+def plot_precision_recall_vs_threshold(precisions, recalls, thresholds):
+    plt.plot(thresholds, precisions[:-1], "b--", label="Precision")
+    plt.plot(thresholds, recalls[:-1], "g-", label="Recall")
+    plt.xlabel("Threshold")
+    plt.legend(loc="center left")
+    plt.ylim([0, 1])
 
+plot_precision_recall_vs_threshold(precisions, recalls, thresholds)
+~~~
+
+![recall](/assets/images/recall.jpg)
+
+* Ta thấy khi threshold = 0 recall = 1 , khi recall = 0.8 thì threshold tăng lên 0.7
+# Giai đoạn 2  Detecter
+Bây giờ ta sẽ detecter pedestrian trên ảnh lớn.
+## 1, Xây dựng sliding window
+~~~ ruby
+def sliding_window(image,window_size,step_size):
+    for y in range(0,image.shape[0]-window_size[1],step_size[1]):
+        for x in range(0,image.shape[1]-window_size[0],step_size[0]):
+            roi = image[y:y+window_size[1],x:x+window_size[0]]
+            yield (x,y,roi)
+~~~
+* function `sliding_window` có 3 para : 1 là `image` (là 1 ảnh xám), hai là `window_size` có chiều (mxn) là kích thước window trên image, cuối cùng là `step_size` có chiều (w,h) là stride theo ox,oy trên image.Giá trị trả về là vị trí (x,y) tương ứng là (top-left) và roi là slide window tương ứng.
+## Xây dựng NMS(non-maxinum-suppression)
+* Ta chỉ giữ lại 1 window trên 1 object mà thôi nên ta sẽ dùng NMS để loại bỏ các window còn lại, giữ lại window tối ưu nhất.Đầu tiên ta cần tính area overlap giữa 2 window.
+~~~ ruby
+def overlaping_area(detection_1,detection_2):
+    #detection_1,detection_2 format [x_left_top,y_left_top,score,width,height]
+    x_1 = detection_1[0]
+    y_1 = detection_1[1]
+    x_w_1 = detection_1[0] + detection_1[3]
+    y_h_1 = detection_1[1] + detection_1[4]
+    
+    x_2 = detection_2[0]
+    y_2 = detection_2[1]
+    x_w_2 = detection_2[0] + detection_2[3]
+    y_h_2 = detection_2[1] + detection_2[4]
+    #tính overlap theo ox,oy .Nếu ko giao nhau trả về 0
+    overlap_x = max(0,min(x_w_1,x_w_2) - max(x_1,x_2))
+    overlap_y = max(0,min(y_h_1,y_h_2) - max(y_1,y_2))
+    #tính area overlap
+    overlap_area = overlap_x*overlap_y
+    #tính total area hợp của 2 detection
+    total_area = detection_1[3]*detection_1[4] + detection_2[3]*detection_2[4] - overlap_area
+    
+    return overlap_area/float(total_area)
+~~~
+* Đây là bài toán tìm intersection giữa 2 rectangle bạn có thể search google xem cái giải quyết. Hàm overlaping_area sẽ trả về tỉ lệ overlap trên tổng area giữa 2 rectangle.
+* Tiếp theo chúng ta xây dựng làm NMS .
+~~~ ruby
+def nms(detections,threshold =0.4):
+    # decections format [x_left_top,y_left_top,score,width,height]
+    # nếu area overlap lớn hơn threshold thì sẽ remove detection nào có score nhỏ hơn
+    if len(detections)==0:
+        return []
+    #sort detection theo score
+    detections = sorted(detections,key = lambda detections : detections[2],reverse = True)
+    #create new detection
+    new_detections = []
+    new_detections.append(detections[0])
+    del detections[0]
+    for index,detection in enumerate(detections):
+        for new_detection in new_detections:
+            if overlaping_area(detection,new_detection)> threshold : #compare areaoverlap với threshold
+                del detections[index]
+                break
+        else :
+            new_detections.append(detection)
+            del detections[index]
+    return new_detections
+~~~
+* Ý tưởng là chúng ta sẽ sort các detection theo score( decision_function) theo thứ tự giảm dần. Sau đó so sánh các detection với nhau, nếu area overlap hơn threshold thì ta sẽ giữ lại detection nào có score lớn hơn.
