@@ -181,6 +181,7 @@ def nms(detections,threshold =0.4):
 * Ý tưởng là chúng ta sẽ sort các detection theo score( decision_function) theo thứ tự giảm dần. Sau đó so sánh các detection với nhau, nếu area overlap hơn threshold thì ta sẽ giữ lại detection nào có score lớn hơn.
 ## 3, Detecter
 * Single object trên mỗi image
+
 ~~~ ruby
 image = cv2.imread("pedestrian.jpg")
 image_test = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
