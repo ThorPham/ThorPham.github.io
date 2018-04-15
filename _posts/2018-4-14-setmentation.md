@@ -13,6 +13,7 @@ hiểu về sentiment analysis.Phân tích cảm xúc(sentiment analysis) đư�
 Bạn bắt đầu vào face, instagram hay tweeter để thu thập các commnent liên quan đến quán ăn của bạn. Bạn bắt đầu đoc thì có người khen người chê, vấn đề xảy ra là bây giờ số comment nó tăng lên 1000 hay 10000 bạn có đủ sức đọc các comment đó hay không.Bạn bắt đầu nghĩ ra sẽ build một model làm việc đó cho bạn. Ta bắt tay vào công việc.
 * Thuật toán sử dung : mình sẽ sử dụng logistic regression kết hợp với kỹ thuật tf-idf
 * Library : pyvi(một thư viện xử lý tiếng việt), sklearn
+
 Các bước thực hiện :
 
 ## 1, Chuẩn bị dữ liệu
