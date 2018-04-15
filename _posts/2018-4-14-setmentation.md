@@ -169,7 +169,16 @@ model = LogisticRegression()
 model.fit(X_train,y_train)
 y_pre = model.predict(X_test)
 print(classification_report(y_test,y_pre))
-~~
+~~~
 ![score](/assets/images/score.jpg)
 * Accuracy là 91% nhưng recall chỉ có 23% tương đối thấp. Có nghĩa là trong 191 comment neg ta chỉ dự đoán chính xác khoảng 44%
 * Bây giờ ta thử predict một số câu.
+~~~ ruby
+text =[["quán nấu dở quá"],["đồ ăn bình thư"],["quán nấu ngon"]]
+for i in text:
+    test = tf.transform(i)
+    print(model.predict(test))
+==>> [0] [1] [1]
+~~~
+
+~~~
