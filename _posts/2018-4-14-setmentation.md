@@ -78,3 +78,7 @@ quán ăn nào đó thì từ "quán ăn" xuất hiện ở tất cả document.
 $$
 tf(w,d) = \frac{number of word w in document d}{total word in document}
 $$
+* tf đo lường tỉ trọng tần suất từ w có trong document d.Vì document thường có lenght khác nhau nên để normalization ta chia nó cho number word trong document d
+$$
+idf = tf* \frac{N}{documnet in word w appear}
+$$
