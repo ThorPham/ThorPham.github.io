@@ -108,7 +108,7 @@ for path in paths :
         comments.append(text_token)
     file.close()
 ~~~
-** Dữ liệu sẽ được tách từ bằng `ViTokenizer.tokenize` sau đó được lưu dưới biến `comment`.
+* Dữ liệu sẽ được tách từ bằng `ViTokenizer.tokenize` sau đó được lưu dưới biến `comment`.
 ~~~ ruby
 stop_word = []
 with open("stop_word.txt",encoding="utf-8") as f :
@@ -120,9 +120,9 @@ with open("stop_word.txt",encoding="utf-8") as f :
 stop_word = stop_word + punc
 print(stop_word)
 ~~~
-** Tiếp theo là xây dựng stop_word và punctuation 
+* Tiếp theo là xây dựng stop_word và punctuation 
 ![stop_word](/assets/images/stop_word.jpg)
-~~~ruby
+~~~ ruby
 sentences = []
 for comment in comments:
     sent = []
@@ -132,7 +132,7 @@ for comment in comments:
                     sent.append(word)
     sentences.append(" ".join(sent)) 
 ~~~
-** Làm sạch data loại bỏ stop_word , những từ không phải alphabet được remove
+* Làm sạch data loại bỏ stop_word , những từ không phải alphabet được remove
 * Tiếp theo ta embedding text thành vector sử dụng if-idf với function `TfidfVectorizer` trong `sklearn'
 ~~~ ruby
 from sklearn.feature_extraction.text import TfidfVectorizer
