@@ -69,3 +69,12 @@ for name in range(len(list_name)):
   ![text](/assets/images/text.jpg)
   
    ![text1](/assets/images/text1.jpg) 
+### 2, Tiền xử lý dữ liệu
+Trước tiên ta tìm hiểu kỹ thuật TF-IDF nó là viết tắt của từ Term frequency invert document frequency.Nó là một kỹ thuật feature extraction dùng trong text mining và information retrieval. Trước khi có tf-idf người ta dùng one-hot-encoding để embedding words sang vector. Nhưng kỹ thuật này gặp một số hạn chế là :
+** Những từ thường xuyên xuất hiện sẽ không có nhiều thông tin nhưng vẫn có tỉ trọng(weight) với các từ khác.vd : chúng ta phân tích về
+quán ăn nào đó thì từ "quán ăn" xuất hiện ở tất cả document. Ta nên giảm tỉ trọng nó xuống
+** Những từ hiếm(rare word) or key word không có sự khác biệt về tỉ trọng thông tin
+* Để khắc phục hạn chế này tf-idf đã ra đời.Tf-idf bao gồm 2 thành phần là tf(term frequency) và idf(inverse document frequency)
+$$
+tf(w,d) = \frac{number of word w in document d}{total word in document}
+$$
