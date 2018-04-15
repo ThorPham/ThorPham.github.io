@@ -13,7 +13,8 @@ hiểu về sentiment analysis.Phân tích cảm xúc(sentiment analysis) đư�
 Bạn bắt đầu vào face, instagram hay tweeter để thu thập các commnent liên quan đến quán ăn của bạn. Bạn bắt đầu đoc thì có người khen người chê, vấn đề xảy ra là bây giờ số comment nó tăng lên 1000 hay 10000 bạn có đủ sức đọc các comment đó hay không.Bạn bắt đầu nghĩ ra sẽ build một model làm việc đó cho bạn. Ta bắt tay vào công việc.
 * Thuật toán sử dung : mình sẽ sử dụng logistic regression kết hợp với kỹ thuật tf-idf
 * Library : pyvi(một thư viện xử lý tiếng việt), sklearn
-* Các bước thực hiện :
+Các bước thực hiện :
+
 ## 1, Chuẩn bị dữ liệu
 ## 2, Tiền xử lý dữ liệu
 ## 3, Build model
@@ -63,16 +64,16 @@ for name in range(len(list_name)):
   * Mỗi cửa hàng có rất nhiều comment (có thể vài trăm) nhưng mình chỉ lấy 30 comment ở mỗi cửa hàng vì máy mình tương đối yếu load
   nhiều máy chạy không nổi.
   * Comment được lấy từ `//div/span[@ng-bind-html='Model.Description` và lưu vào biến `texts`
-  * Score được lấy từ `//li/div/div/div/span[@class='ng-binding'` và lưu vào biến `scores'
+  * Score được lấy từ `//li/div/div/div/span[@class='ng-binding'` và lưu vào biến `scores`
   * Mình cho nó chạy tầm 2 tiếng thu được tầm 6000 comment và được lưu dưới dạng text
   
   ![text](/assets/images/text.jpg)(hình môt)
   
    ![text1](/assets/images/text1.jpg) 
 ### 2, Tiền xử lý dữ liệu
-Trước tiên ta tìm hiểu kỹ thuật TF-IDF nó là viết tắt của từ Term frequency invert document frequency.Nó là một kỹ thuật feature extraction dùng trong text mining và information retrieval. Trước khi có tf-idf người ta dùng one-hot-encoding để embedding words sang vector. Nhưng kỹ thuật này gặp một số hạn chế là :
-* Những từ thường xuyên xuất hiện sẽ không có nhiều thông tin nhưng vẫn có tỉ trọng(weight) ngang với các từ khác.vd : stop word chẳng hạn hay chúng ta phân tích vềquán ăn nào đó thì từ "quán ăn" xuất hiện ở tất cả document.Chúng ta cần giảm tỉ trọng về mặt thông tin nó xuống vì thông tin không mang nhiều giá trị.
-* Những từ hiếm(rare word) or key word không có sự khác biệt về tỉ trọng thông tin
+*Trước tiên ta tìm hiểu kỹ thuật TF-IDF nó là viết tắt của từ Term frequency invert document frequency.Nó là một kỹ thuật feature extraction dùng trong text mining và information retrieval. Trước khi có tf-idf người ta dùng one-hot-encoding để embedding words sang vector. Nhưng kỹ thuật này gặp một số hạn chế là :
+  * Những từ thường xuyên xuất hiện sẽ không có nhiều thông tin nhưng vẫn có tỉ trọng(weight) ngang với các từ khác.vd : stop word chẳng hạn hay chúng ta phân tích vềquán ăn nào đó thì từ "quán ăn" xuất hiện ở tất cả document.Chúng ta cần giảm tỉ trọng về mặt thông tin nó  xuống vì thông tin không mang nhiều giá trị.
+  * Những từ hiếm(rare word) or key word không có sự khác biệt về tỉ trọng thông tin
 * Để khắc phục hạn chế này tf-idf đã ra đời.Tf-idf bao gồm 2 thành phần là tf(term frequency) và idf(inverse document frequency)
 <div style="text-align: center"> $$
 tf(w,d) = \frac{\text{number of word w in document d}}{\text{total word in document}}
