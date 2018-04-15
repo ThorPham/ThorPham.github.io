@@ -77,16 +77,18 @@ quán ăn nào đó thì từ "quán ăn" xuất hiện ở tất cả document.
 * Để khắc phục hạn chế này tf-idf đã ra đời.Tf-idf bao gồm 2 thành phần là tf(term frequency) và idf(inverse document frequency)
 
 $$
-tf(w,d) = \frac{(number of word w in document d)}{(total word in document)}
+tf(w,d) = \frac{(number_of_word_w_in_document_d)}{(total_word_in_document)}
 $$
-* tf đo lường tỉ trọng tần suất từ w có trong document d.Vì document thường có lenght khác nhau nên để normalization ta chia nó cho number word trong document d
+* tf đo lường tỉ trọng tần suất từ w có trong document d.Vì document thường có lenght khác nhau nên để normalization ta chia nó cho number word trong document d.
+
 $$
-idf = tf* \frac{N}{(documnet in word w appear)}
+idf = tf* \frac{N}{(documnet_in_word_w_appear)}
 $$
 * N là tổng số document trong dataset.Tỉ số N\(documnet in word w appear) được xem là inverse document frequency. Nếu một từ xuất hiện nhiều ở các document thì tỉ số này sẽ gần 1.Và ngược lại một từ ít xuất hiện hơn tỉ số này sẽ cao hơn 1. Điều này giúp giảm tỉ trọng của 
 những từ thường xuyên suất hiện và tăng tỉ trọng những từ ít xuất hiện trong document hơn (lưu ý N luôn lớn hơn hoặc bằng documnet in word w appear).
 * Một cách thay thế là người dùng log transform để đưa tỉ số N\(documnet in word w appear) để tránh giá trị của nó quá cao gây khó khăn trong việc tính toán ( lưu ý log nó làm giảm giá trị theo cấp lũy thừa). Khi đó công thức idf cuối cùng sẽ là 
 
 $$
-idf = tf* log(\frac{N}{(documnet in word w appear)})
+idf = tf* log(\frac{N}{(documnet_in_word_w_appear)})
 $$
+* Ví dụ : Một document 100 word chứa word cat 3 lần. $ tf = \frac{3}{100} = 0.03 $ . Giả sử có 10000 document mà word cat xuất hiện trong 1000 document. $ idf = 0.03* \frac{10000}{1000} = 0.06 $
