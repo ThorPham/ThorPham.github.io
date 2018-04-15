@@ -174,11 +174,25 @@ print(classification_report(y_test,y_pre))
 * Accuracy là 91% nhưng recall chỉ có 23% tương đối thấp. Có nghĩa là trong 191 comment neg ta chỉ dự đoán chính xác khoảng 44%
 * Bây giờ ta thử predict một số câu.
 ~~~ ruby
-text =[["quán nấu dở quá"],["đồ ăn bình thư"],["quán nấu ngon"]]
+text =[["quán nấu dở quá"],["đồ ăn bình_thường"],["quán nấu ngon"]]
 for i in text:
     test = tf.transform(i)
     print(model.predict(test))
 ==>> [0] [1] [1]
 ~~~
+# 4, Funny một tí
+Ta sẽ xem những từ nào được sử dụng nhiều nhất trong document và xây dựng `wordcloud` của nó.
+~~~ ruby
+import wordcloud
+import matplotlib.pyplot as plt
+%matplotlib inline
+cloud = np.array(sentences).flatten()
+plt.figure(figsize=(20,10))
+word_cloud = wordcloud.WordCloud(max_words=100,background_color ="black",
+                                 width=2000,height=1000,mode="RGB").generate(str(cloud))
+plt.axis("off")
+plt.imshow(word_cloud)
+~~~ 
+![cloud](/assets/images/cloud.jpg)
 
-~~~
+* Những từ xuất hiên nhiều nhất là `món` `ăn` `mình` `hơi` là những từ xuất hiện nhiều nhất. Tiếp theo là `phục vụ` `không gian` `giá`.Có nhiều cụm từ liên quan đến lĩnh vực nấu ăn và cũng có nhiều từ không liên quan lắm
