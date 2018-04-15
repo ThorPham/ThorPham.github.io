@@ -66,7 +66,7 @@ for name in range(len(list_name)):
   * Score được lấy từ `//li/div/div/div/span[@class='ng-binding'` và lưu vào biến `scores'
   * Mình cho nó chạy tầm 2 tiếng thu được tầm 6000 comment và được lưu dưới dạng text
   
-  ![text](/assets/images/text.jpg)
+  ![text](/assets/images/text.jpg)(hình môt)
   
    ![text1](/assets/images/text1.jpg) 
 ### 2, Tiền xử lý dữ liệu
