@@ -83,8 +83,8 @@ idf = tf* \frac{N}{\text{documnet in word w appear}}
 $$ </div>
 * N là tổng số document trong dataset.Tỉ số $\frac{N}{\text{documnet in word w appear}}$ được xem là inverse document frequency. Nếu một từ xuất hiện nhiều ở các document thì tỉ số này sẽ gần 1.Và ngược lại một từ ít xuất hiện hơn tỉ số này sẽ cao hơn 1. Điều này giúp giảm tỉ trọng của 
 những từ thường xuyên suất hiện và tăng tỉ trọng những từ ít xuất hiện trong document hơn (lưu ý N luôn lớn hơn hoặc bằng documnet in word w appear).
-* Một vấn đề là khi N rất lớn mà `documnet in word w appear` rất nhỏ thì tỉ số này rất lơn cho nên là người dùng log transform để giảm giá trị tỉ số N\(documnet in word w appear) tránh gây khó khăn trong việc tính toán ( lưu ý log nó làm giảm giá trị theo cấp lũy thừa). Khi đó công thức idf cuối cùng sẽ là 
+* Một vấn đề là khi N rất lớn mà `documnet in word w appear` rất nhỏ thì tỉ số này rất lơn cho nên là người dùng log transform để giảm giá trị tỉ số $\frac{N}{documnet in word w appear}$ tránh gây khó khăn trong việc tính toán ( lưu ý log nó làm giảm giá trị theo cấp lũy thừa). Khi đó công thức idf cuối cùng sẽ là 
 <div style="text-align: center "> $$
 idf = tf* log(\frac{N}{\text{documnet in word w appear}})
 $$ </div>
-* Ví dụ : Một document 100 word chứa word cat 3 lần. $ tf = \frac{3}{100} = 0.03 $ . Giả sử có 10000 document mà word cat xuất hiện trong 1000 document. $ idf = 0.03* log(\frac{10000}{1000}) = 0.06 $
+* Ví dụ : Một document 100 word chứa word cat 3 lần. $ tf = \frac{3}{100} = 0.03 $ . Giả sử có 10000 document mà word cat xuất hiện trong 1000 document. $ idf(cat) = 0.03* log(\frac{10000}{1000}) = 0.06 $
