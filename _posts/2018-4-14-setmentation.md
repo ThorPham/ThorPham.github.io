@@ -144,7 +144,7 @@ tf.fit(sentences)
 X = tf.transform(sentences)
 ~~~
 * Hàm `TfidfVectorizer` có các tham số chúng ta cần chú ý là
-  * `min_df : loại bỏ những từ nào từ vocabulary có tần suất suất hiện nhỏ hơn `min_df ( tính theo count)
+  * `min_df` : loại bỏ những từ nào từ vocabulary có tần suất suất hiện nhỏ hơn `min_df` ( tính theo count)
   * `max_df` " loại bỏ những từ nào từ vocabulary có tần suất xuất hiện lớn hơn `max_df` ( tính theo %)
   * `sublinear_tf`: Scale term frequency bằng logarithmic scale
   * `stop_words` loại bỏ stop word, chúng ta đã làm trước đó nên không cần tham số này
