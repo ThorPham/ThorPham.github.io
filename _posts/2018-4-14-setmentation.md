@@ -173,7 +173,7 @@ y_pre = model.predict(X_test)
 print(classification_report(y_test,y_pre))
 ~~~
 ![score](/assets/images/score.jpg)
-* Accuracy là 91% nhưng recall chỉ có 23% tương đối thấp. Có nghĩa là trong 191 comment neg ta chỉ dự đoán chính xác khoảng 44%
+* Accuracy là 91% nhưng recall chỉ có 23% tương đối thấp. Có nghĩa là trong 191 comment neg ta chỉ dự đoán chính xác khoảng 44 comment
 * Bây giờ ta thử predict một số câu.
 ~~~ ruby
 text =[["quán nấu dở quá"],["đồ ăn bình_thường"],["quán nấu ngon"]]
