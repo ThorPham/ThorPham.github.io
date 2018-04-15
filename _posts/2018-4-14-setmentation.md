@@ -75,10 +75,18 @@ Trước tiên ta tìm hiểu kỹ thuật TF-IDF nó là viết tắt của t�
 quán ăn nào đó thì từ "quán ăn" xuất hiện ở tất cả document. Ta nên giảm tỉ trọng nó xuống
 ** Những từ hiếm(rare word) or key word không có sự khác biệt về tỉ trọng thông tin
 * Để khắc phục hạn chế này tf-idf đã ra đời.Tf-idf bao gồm 2 thành phần là tf(term frequency) và idf(inverse document frequency)
+
 $$
-tf(w,d) = \frac{number of word w in document d}{total word in document}
+tf(w,d) = \frac{(number of word w in document d)}{(total word in document)}
 $$
 * tf đo lường tỉ trọng tần suất từ w có trong document d.Vì document thường có lenght khác nhau nên để normalization ta chia nó cho number word trong document d
 $$
-idf = tf* \frac{N}{documnet in word w appear}
+idf = tf* \frac{N}{(documnet in word w appear)}
+$$
+* N là tổng số document trong dataset.Tỉ số N\(documnet in word w appear) được xem là inverse document frequency. Nếu một từ xuất hiện nhiều ở các document thì tỉ số này sẽ gần 1.Và ngược lại một từ ít xuất hiện hơn tỉ số này sẽ cao hơn 1. Điều này giúp giảm tỉ trọng của 
+những từ thường xuyên suất hiện và tăng tỉ trọng những từ ít xuất hiện trong document hơn (lưu ý N luôn lớn hơn hoặc bằng documnet in word w appear).
+* Một cách thay thế là người dùng log transform để đưa tỉ số N\(documnet in word w appear) để tránh giá trị của nó quá cao gây khó khăn trong việc tính toán ( lưu ý log nó làm giảm giá trị theo cấp lũy thừa). Khi đó công thức idf cuối cùng sẽ là 
+
+$$
+idf = tf* log(\frac{N}{(documnet in word w appear)})
 $$
