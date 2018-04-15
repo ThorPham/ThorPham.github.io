@@ -88,3 +88,63 @@ những từ thường xuyên suất hiện và tăng tỉ trọng những từ 
 idf = tf* log(\frac{N}{\text{documnet in word w appear}})
 $$ </div>
 * Ví dụ : Một document 100 word chứa word cat 3 lần. $ tf = \frac{3}{100} = 0.03 $ . Giả sử có 10000 document mà word cat xuất hiện trong 1000 document. $ idf(cat) = 0.03* log(\frac{10000}{1000}) = 0.06 $
+* Ta bắt đầu xử lý dữ liệu. Đầu tiên là load dữ liệu
+~~~ruby
+#import library
+import numpy as np
+import pandas as pd
+from pyvi import ViTokenizer
+import glob
+from collections import Counter
+from string import punctuation
+#load data
+paths = glob.glob("./comment/*.txt")
+comments = []
+for path in paths :
+    with open(path,encoding="utf-8") as file:
+        text= file.read()
+        text_lower = text.lower()
+        text_token = ViTokenizer.tokenize(text_lower)
+        comments.append(text_token)
+    file.close()
+~~~
+** Dữ liệu sẽ được tách từ bằng `ViTokenizer.tokenize` sau đó được lưu dưới biến `comment`.
+~~~ ruby
+stop_word = []
+with open("stop_word.txt",encoding="utf-8") as f :
+    text = f.read()
+    for word in text.split() :
+        stop_word.append(word)
+    f.close()
+ punc = list(punctuation)
+stop_word = stop_word + punc
+print(stop_word)
+~~~
+** Tiếp theo là xây dựng stop_word và punctuation 
+![stop_word](/assets/images/stop_word.jpg)
+~~~ruby
+sentences = []
+for comment in comments:
+    sent = []
+    for word in comment.split(" ") :
+            if (word not in stop_word) :
+                if ("_" in word) or (word.isalpha() == True):
+                    sent.append(word)
+    sentences.append(" ".join(sent)) 
+~~~
+** Làm sạch data loại bỏ stop_word , những từ không phải alphabet được remove
+* Tiếp theo ta embedding text thành vector sử dụng if-idf với function `TfidfVectorizer` trong `sklearn'
+~~~ ruby
+from sklearn.feature_extraction.text import TfidfVectorizer
+tf = TfidfVectorizer(min_df=5,max_df= 0.8,max_features=3000,sublinear_tf=True)
+tf.fit(sentences)
+X = tf.transform(sentences)
+~~~
+* Hàm `TfidfVectorizer` có các tham số chúng ta cần chú ý là
+  * `min_df : loại bỏ những từ nào từ vocabulary có tần suất suất hiện nhỏ hơn `min_df ( tính theo count)
+  * `max_df` " loại bỏ những từ nào từ vocabulary có tần suất xuất hiện lớn hơn `max_df` ( tính theo %)
+  * `sublinear_tf`: Scale term frequency bằng logarithmic scale
+  * `stop_words` loại bỏ stop word, chúng ta đã làm trước đó nên không cần tham số này
+  * `max_features` lựa chọn số character vào vocabulary
+  * `vocabulary` nếu chúng ta đã xây dựng `vocabulury` trước đó thì không cần `max_features`
+  * `token_pattern` là regular expression để chọn word vào vocabulary
