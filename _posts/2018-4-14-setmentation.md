@@ -60,7 +60,7 @@ for name in range(len(list_name)):
         texts.append(comment)
         scores.append(scoring)
  ~~~
-  ### Giải thích code một tí
+  ## Giải thích code một tí
   * Để tránh code dài mình lưu các tên cửa hàng ở file `name.txt`
   * Mỗi cửa hàng có rất nhiều comment (có thể vài trăm) nhưng mình chỉ lấy 30 comment ở mỗi cửa hàng vì máy mình tương đối yếu load
   nhiều máy chạy không nổi.
@@ -71,7 +71,7 @@ for name in range(len(list_name)):
   ![text](/assets/images/text.jpg)(hình môt)
   
    ![text1](/assets/images/text1.jpg) 
-### 2, Tiền xử lý dữ liệu
+# 2, Tiền xử lý dữ liệu
 *Trước tiên ta tìm hiểu kỹ thuật TF-IDF nó là viết tắt của từ Term frequency invert document frequency.Nó là một kỹ thuật feature extraction dùng trong text mining và information retrieval. Trước khi có tf-idf người ta dùng one-hot-encoding để embedding words sang vector. Nhưng kỹ thuật này gặp một số hạn chế là :
   * Những từ thường xuyên xuất hiện sẽ không có nhiều thông tin nhưng vẫn có tỉ trọng(weight) ngang với các từ khác.vd : stop word chẳng hạn hay chúng ta phân tích vềquán ăn nào đó thì từ "quán ăn" xuất hiện ở tất cả document.Chúng ta cần giảm tỉ trọng về mặt thông tin nó  xuống vì thông tin không mang nhiều giá trị.
   * Những từ hiếm(rare word) or key word không có sự khác biệt về tỉ trọng thông tin
