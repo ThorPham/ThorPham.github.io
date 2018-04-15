@@ -149,3 +149,27 @@ X = tf.transform(sentences)
   * `max_features` lựa chọn số character vào vocabulary
   * `vocabulary` nếu chúng ta đã xây dựng `vocabulury` trước đó thì không cần `max_features`
   * `token_pattern` là regular expression để chọn word vào vocabulary
+* Xử lý label : ta sẽ đưa ra một threshold để quyết định 1 comment là `pos` hay `neg`. Ta chọn threshold là 6, khi score < 6 thì comment được xem là `neg` và ngược lại là `pos`
+~~~ ruby
+from sklearn.preprocessing import Binarizer
+binaray = Binarizer(threshold=6)
+y = binaray.fit_transform(y_score)
+y = np.array(y).flatten()
+~~~
+* Nhận xét dữ liệu của chúng ta là không tốt lắm vì số `neg = 691` trên tổng số comment là 6000. Như vậy chỉ có 10% là `neg` khi đó dữ liệu sẽ `unbalance` . Cũng dễ hiểu vì đa số quán ăn trên trang `tripnow.vn` là ngon hoặc là foody.vn thuê người comment chẳng hạn. Vì cả 2 label `neg` và `pos` có thể xem là quan trọng như nhau. không có biến nào trội hơn nên model của chúng ta trên data này có lẽ sẽ không tốt. Hơn nữa score này chỉ mang tính chất tượng trưng nên không dám chắc nó là tiêu chí phân loại `neg` và `pos` tốt.
+* Chia dữ liệu để training và testing tỷ lệ test là 30%
+~~~ ruby
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.3,random_state=10,shuffle=True)
+~~~
+# 3, Build model
+Ta dùng logistic regression để training model.
+~~~ ruby
+model = LogisticRegression()
+model.fit(X_train,y_train)
+y_pre = model.predict(X_test)
+print(classification_report(y_test,y_pre))
+~~
+![score](/assets/images/score.jpg)
+* Accuracy là 91% nhưng recall chỉ có 23% tương đối thấp. Có nghĩa là trong 191 comment neg ta chỉ dự đoán chính xác khoảng 44%
+* Bây giờ ta thử predict một số câu.
