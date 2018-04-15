@@ -88,8 +88,9 @@ những từ thường xuyên suất hiện và tăng tỉ trọng những từ 
 idf = tf* log(\frac{N}{\text{documnet in word w appear}})
 $$ </div>
 * Ví dụ : Một document 100 word chứa word cat 3 lần. $ tf = \frac{3}{100} = 0.03 $ . Giả sử có 10000 document mà word cat xuất hiện trong 1000 document. $ idf(cat) = 0.03* log(\frac{10000}{1000}) = 0.06 $
+
 * Ta bắt đầu xử lý dữ liệu. Đầu tiên là load dữ liệu
-~~~ruby
+~~~ ruby
 #import library
 import numpy as np
 import pandas as pd
