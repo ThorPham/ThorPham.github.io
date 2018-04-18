@@ -32,7 +32,7 @@ tin quan trọng từ data,phát hiện và loại bỏ outlier và giảm chi�
   $$
   * Trừ X với mean của X :
   $$
-  D = { d_{1},d_{2},..,d_{N} } = \sum_{i=1}^{N}x_{i} - \mu
+  D = \{d_{1},d_{2},..,d_{N}\} = \sum_{i=1}^{N}x_{i} - \mu
   $$
   * Tính toán covarian :
     $$
