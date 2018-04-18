@@ -3,7 +3,7 @@ layout: post
 title: "Tìm hiểu regression trong object detection "
 description: "phân tích cảm xúc"
 categories: [python,machine_learning]
-tags: [python,machine learning]
+tags: [python,machine learning,deep_learning]
 redirect_from:
   - /2018/04/18/
 ---
