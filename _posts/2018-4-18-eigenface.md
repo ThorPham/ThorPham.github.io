@@ -21,14 +21,16 @@ tin quan trọng từ data,phát hiện và loại bỏ outlier và giảm chi�
 để chiếu(project) data sao cho variation giữ lại là nhiều nhất. Ta có thể hình dung qua hình vẽ dưới đây.
 
 ![pca1](/assets/images/pca1.jpg)
- 
- * Có 2 phương pháp tiếp cận PCA là covarian matrix và SVD chúng ta cùng tìm hiểu qua 2 phương pháp này .
- * Phương pháp Covarian matrix : Các bước thực hiện thuật toán như sau :
+* Có 2 phương pháp tiếp cận PCA là covarian matrix và SVD chúng ta cùng tìm hiểu qua 2 phương pháp này .
+* Phương pháp Covarian matrix : Các bước thực hiện thuật toán như sau :
  ![pca](/assets/images/pca.jpg)
  
-  1, X data có chiều MxN ( với N là số sample ,M là số feature).
-  2, Tính mean của X :
+    1, X data có chiều MxN ( với N là số sample ,M là số feature).
+    2, Tính mean của X :
   $$
   \mu = \frac{1}{N}\cdot\sum_{i=1}^{N}x_{i}
   $$
-  
+  3, Trừ X với mean của X :
+  $$
+  D = {d_{1},d_{2},..d{N}} = \sum_{i=1}^{N}x_{i} - \mu
+  $$
