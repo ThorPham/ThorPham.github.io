@@ -24,9 +24,9 @@ number_data = 5000
 img_size = 8
 min_size_obj = 1
 max_size_obj = 4
-number_obj = 2
+number_obj = 1
 # x là dataset image, y là label với 4 tham số(x,y,w.h)
-bboxes = np.zeros((5000,2,4))
+bboxes = np.zeros((5000,1,4))
 image = np.zeros((5000,img_size,img_size))
 for i in range(5000):
     for obj in range(number_obj):
