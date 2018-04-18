@@ -41,6 +41,15 @@ for i in range(5000):
   * 5000 `bounding box` có size từ w,h từ 1-4 và có màu đen
   * Mỗi image chỉ có duy nhất 1 object
 * Image sau khi tạo sẽ như thế này :
+~~~ ruby
+plt.figure(figsize=(15,15))
+plt.axis("off")
+for i in range(4):
+    plt.subplot(1,4,i+1)
+    plt.imshow(image[i],cmap="Greys",interpolation='none', origin='lower', extent=[0, img_size, 0, img_size])
+    for bbox in bboxes[i]:
+        plt.gca().add_patch(matplotlib.patches.Rectangle((bbox[0], bbox[1]), bbox[2], bbox[3], ec='r', fc='none'))
+~~~
 ![bounding_box](/assets/images/bounding.jpg)
 * Cái chúng ta cần predict là đường viền màu đỏ. Image sẽ có dimension là (5000, 8, 8) ,bounding box có dimension là (5000, 1, 4).
 ## Traing model.
