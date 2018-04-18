@@ -26,3 +26,9 @@ tin quan trọng từ data,phát hiện và loại bỏ outlier và giảm chi�
  * Phương pháp Covarian matrix : Các bước thực hiện thuật toán như sau :
  ![pca](/assets/images/pca.jpg)
  
+  1, X data có chiều MxN ( với N là số sample ,M là số feature).
+  2, Tính mean của X :
+  $$
+  \mu = \frac{1}{N}\cdot\sum_{i=1}^{N}x_{i}
+  $$
+  
