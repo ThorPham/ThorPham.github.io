@@ -40,7 +40,11 @@ tin quan trọng từ data,phát hiện và loại bỏ outlier và giảm chi�
     $$
   * Tính toán EigenVector `V` và EigenValue $\lambda$ của Covarian $\sum$
   * Sort EigenValue tương ứng với EigenVector theo thứ tự $\lambda$ giảm dần .
-  * Chọn những EigenVector tương ứng với EigenValue lớn nhất $ W = {v_{1},v_{2},..v_{k}} $ . EigenVector W sẽ làm đại diện để project X vào PCA space
-  * Tất cả sample X sẽ được project vào không gian nhỏ hơn theo công thưc $Y = W_{T}\cdot D$
+  * Chọn những EigenVector tương ứng với EigenValue lớn nhất $ W = \{v_{1},v_{2},..v_{k}\} $ . EigenVector W sẽ làm đại diện để project X vào PCA space
+  * Tất cả sample X sẽ được project vào không gian nhỏ hơn theo công thưc $Y = W^{T}\cdot D$
 * Lưu ý về dimension cái biến :
+
 ![dimension](/assets/images/dimension.jpg)
+
+
+
