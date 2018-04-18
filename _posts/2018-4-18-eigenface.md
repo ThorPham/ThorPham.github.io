@@ -21,12 +21,12 @@ tin quan trọng từ data,phát hiện và loại bỏ outlier và giảm chi�
 để chiếu(project) data sao cho variation giữ lại là nhiều nhất. Ta có thể hình dung qua hình vẽ dưới đây.
 
 ![pca1](/assets/images/pca1.jpg)
-* Có 2 phương pháp tiếp cận PCA là covarian matrix và SVD chúng ta cùng tìm hiểu qua 2 phương pháp này .
+* Có 2 phương pháp tiếp cận PCA là covarian matrix và SVD chúng ta chỉ tìm hiểu về covarian matrix trong bài này .
 * Phương pháp Covarian matrix : Các bước thực hiện thuật toán như sau :
  ![pca](/assets/images/pca.jpg)
  
   * X data có chiều MxN ( với N là số sample ,M là số feature).
-    2, Tính mean của X :
+  * Tính mean của X :
   $$
   \mu = \frac{1}{N}\cdot\sum_{i=1}^{N}x_{i}
   $$
@@ -40,11 +40,22 @@ tin quan trọng từ data,phát hiện và loại bỏ outlier và giảm chi�
     $$
   * Tính toán EigenVector **V** và EigenValue $\lambda$ của Covarian $\sum$
   * Sort EigenValue tương ứng với EigenVector theo thứ tự $\lambda$ giảm dần .
-  * Chọn những EigenVector tương ứng với EigenValue lớn nhất $ W = $\{v_{1},v_{2},..v_{k}\}$ . EigenVector W sẽ làm đại diện để project X vào PCA space
+  * Chọn những EigenVector tương ứng với EigenValue lớn nhất $ W = \{v_{1},v_{2},..v_{k}\}$ . EigenVector W sẽ làm đại diện để project X vào PCA space
   * Tất cả sample X sẽ được project vào không gian nhỏ hơn theo công thưc $Y = W^{T}\cdot D$
 * Lưu ý về dimension cái biến :
 
 ![dimension](/assets/images/dimension.jpg)
 
-
+* Xây dựng PCA space.
+  * Để xây dựng không gian nhỏ hơn (từ M thành k), trong đó k là số eigen value mà ta chọn. Khi đó PCA space được định nghĩa là 
+  $ W = \{v_{1},v_{2},..,v_{k}\} . Ta viết lại biến Y là project của X qua W như sau :
+  $$
+  Y = W_{T} \cdot D = \sum_{i=1}^{N}(x_{i} - \mu)
+  $$
+## Tìm hiểu EigenFace 
+* EigenFace Hiểu một cách đơn giản là nó dung PCA là feature extraction sau đó mới đưa vào model để training. Mỗi image có chiều chẳng hạn 28x28 = 784 pixel nếu đưa hết vào model thì có một số nhược điểm sau :
+  * Thời gian training lâu vì chiều dữ liệu lớn
+  * Không phải tất cả các vị trí trên image đều quan trọng
+* Vì vậy PCA giúp ta khắc phục các nhược điểm này , nó giúp ta giảm chiều dữ liệu mà vẫn giữ lại được những thông tin quan trọng trên image.
+* Các bước thực hiện thuật toán .
 
