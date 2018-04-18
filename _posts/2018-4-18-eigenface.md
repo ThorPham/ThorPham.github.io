@@ -30,7 +30,11 @@ tin quan trọng từ data,phát hiện và loại bỏ outlier và giảm chi�
   $$
   \mu = \frac{1}{N}\cdot\sum_{i=1}^{N}x_{i}
   $$
-  3, Trừ X với mean của X :
+    3, Trừ X với mean của X :
   $$
   D = {d_{1},d_{2},..d{N}} = \sum_{i=1}^{N}x_{i} - \mu
   $$
+    4, Tính toán covarian :
+    $$
+    \sum = \frac{1}{N-1}\cdotD\cdotD^{T}
+    $$
