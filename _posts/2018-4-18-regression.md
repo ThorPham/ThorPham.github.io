@@ -75,10 +75,11 @@ model.summary()
 ![summary](/assets/images/summary.jpg)
 
 * traing model
+
 ~~~ ruby
 model.fit(X_train,y_train,epochs=50,batch_size=200)
 y_predict = model.predict(X_test)
-~~
+~~~
   * Training model với 50 epochs và batch size mỗi epochs là 200. Máy chạy cpu tầm chưa đến 1p
   * Sau đó predict test data dưới variable y_predict
   
