@@ -25,16 +25,20 @@ tin quan trọng từ data,phát hiện và loại bỏ outlier và giảm chi�
 * Phương pháp Covarian matrix : Các bước thực hiện thuật toán như sau :
  ![pca](/assets/images/pca.jpg)
  
-    1, X data có chiều MxN ( với N là số sample ,M là số feature).
+  * X data có chiều MxN ( với N là số sample ,M là số feature).
     2, Tính mean của X :
   $$
   \mu = \frac{1}{N}\cdot\sum_{i=1}^{N}x_{i}
   $$
-    3, Trừ X với mean của X :
+  * Trừ X với mean của X :
   $$
   D = {d_{1},d_{2},..d{N}} = \sum_{i=1}^{N}x_{i} - \mu
   $$
-    4, Tính toán covarian :
+  * Tính toán covarian :
     $$
     \sum = \frac{1}{N-1}\cdotD\cdotD^{T}
     $$
+  * Tính toán EigenVector `V` và EigenValue $\lambda$ của Covarian $\sum$
+  * Sort EigenValue tương ứng với EigenVector theo thứ tự $\lambda$ giảm dần .
+  * Chọn những EigenVector tương ứng với EigenValue lớn nhất $ W = {v_{1},v_{2},..v_{k}} $ . EigenVector W sẽ làm đại diện để project X vào PCA space
+  * Tất cả sample X sẽ được project vào không gian nhỏ hơn theo công thưc $Y = W_{T}\cdotD$
