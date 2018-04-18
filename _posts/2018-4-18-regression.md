@@ -76,6 +76,8 @@ model.add(Dense(4))
 model.compile(optimizer="adadelta",loss="mse")
 model.summary()
 ~~~
+~~~
+~~~
   * Ta dùng 2 layers : layer 1 là 300 node,layer 2 là 100 node với activation là `relu`.Cuối cùng là một layer `dropout` với tỉ lệ 20%
   * Optimizer bằng `adadelta` và loss là `mean square error`.
   
