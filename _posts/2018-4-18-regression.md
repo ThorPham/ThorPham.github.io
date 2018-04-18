@@ -16,8 +16,7 @@ Có hàng ngàn câu hỏi vì sao ở trong đầu mình hiện ra dù đi hỏ
   * Đánh giá model
   
 ## Chuẩn bị dữ liệu .
-Dữ liệu 'input` là những image có object mà ta muốn detection và `ouput` là những bouding box sẽ có dạng (x,y,w,h). Trong đó x,y là tọa độ
-leftop của bounding box, (w,h) là width và height. Chúng ta sẽ mô phỏng dữ liệu như sau :
+Dữ liệu `input` là những image có object mà ta muốn detection và `ouput` là những bouding box sẽ có dạng (x,y,w,h). Trong đó x,y là tọa độ leftop của bounding box, (w,h) là width và height. Chúng ta sẽ mô phỏng dữ liệu như sau :
 ~~~ ruby
 np.random.seed(10)
 number_data = 5000
