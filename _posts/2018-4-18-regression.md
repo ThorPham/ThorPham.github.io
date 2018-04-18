@@ -63,6 +63,19 @@ X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.3,random_state=
    * X sẽ có chiều là (5000,64) 
    * y có chiều là (5000,4)
 * Build model.
+~~~ ruby
+from keras.models import Sequential
+from keras.layers import Dense,Dropout,Activation
+
+model = Sequential()
+model.add(Dense(300,input_dim =64))
+model.add(Dense(100))
+model.add(Dropout(0.2))
+model.add(Activation("relu"))
+model.add(Dense(4))
+model.compile(optimizer="adadelta",loss="mse")
+model.summary()
+~~~
   * Ta dùng 2 layers : layer 1 là 300 node,layer 2 là 100 node với activation là `relu`.Cuối cùng là một layer `dropout` với tỉ lệ 20%
   * Optimizer bằng `adadelta` và loss là `mean square error`.
   
