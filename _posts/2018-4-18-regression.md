@@ -72,7 +72,7 @@ model.summary()
   * Ta dùng 2 layers : layer 1 là 300 node,layer 2 là 100 node với activation là `relu`.Cuối cùng là một layer `dropout` với tỉ lệ 20%
   * Optimizer bằng `adadelta` và loss là `mean square error`.
   
-  <div style="text-align: center ">![summary](/assets/images/summary.jpg) </div>
+![summary](/assets/images/summary.jpg)
 
 * traing model
 ~~~ ruby
@@ -82,7 +82,7 @@ y_predict = model.predict(X_test)
   * Training model với 50 epochs và batch size mỗi epochs là 200. Máy chạy cpu tầm chưa đến 1p
   * Sau đó predict test data dưới variable y_predict
   
-  <div style="text-align: center ">![training](/assets/images/training.jpg) </div>
+![training](/assets/images/training.jpg)
 
 ## Đánh giá model
 Nhìn vào hình vẽ đầu tiền ta có nhận xét là : model predict tốt là khi đường viền màu đỏ và  `bounding box` nó càng sát nhau . Như vậy
