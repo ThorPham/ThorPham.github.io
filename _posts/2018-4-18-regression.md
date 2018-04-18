@@ -61,9 +61,9 @@ y = bboxes.reshape((5000,-1))
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.3,random_state=10)
 
 ~~~
-  * X sẽ có chiều là (5000,64) 
-  * y có chiều là (5000,4)
-* Build model.
+    * X sẽ có chiều là (5000,64) 
+    * y có chiều là (5000,4)
+ * Build model.
 ~~~ ruby
 from keras.models import Sequential
 from keras.layers import Dense,Dropout,Activation
