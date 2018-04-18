@@ -136,7 +136,6 @@ for i in range(4):
         plt.title("IOU = "+str(iou),color='blue')
 ~~~
 ![evaluation](/assets/images/evaluation.jpg)
-* Ta tính được mean cua IOU `0.79` tức 79% tương đối tốt, chúng ta có thể cải thiện model bằng một số cách như : normalizer data trước khi training, thay đổi số node trên mỗi layer hoặc thay đổi active fuction.
 ~~~ruby
 IOU = []
 for i in range(len(X_test)):
@@ -144,3 +143,4 @@ for i in range(len(X_test)):
     IOU.append(iou)
 np.mean(IOU)
 ~~~
+* Ta tính được mean cua IOU `0.79` tức 79% tương đối tốt, chúng ta có thể cải thiện model bằng một số cách như : normalizer data trước khi training, thay đổi số node trên mỗi layer hoặc thay đổi active fuction.
