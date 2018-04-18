@@ -24,4 +24,5 @@ tin quan trọng từ data,phát hiện và loại bỏ outlier và giảm chi�
  
  * Có 2 phương pháp tiếp cận PCA là covarian matrix và SVD chúng ta cùng tìm hiểu qua 2 phương pháp này .
  * Phương pháp Covarian matrix : Các bước thực hiện thuật toán như sau :
-    * Cho một data matrix ($
+ ![pca](/assets/images/pca.jpg)
+ 
