@@ -9,16 +9,12 @@ redirect_from:
 ---
 ## Mở đầu 
 Lần đầu tiên mình đọc về thuật toán YOLO(you look only one) là trên khóa "Convolution neural network" của thầy Andrew Ng trên coursera.
-Có hàng ngàn câu hỏi vì sao ở trong đầu mình hiện ra dù đi hỏi khắp nơi mà nhiều trong số đó vẫn chưa có lời giải đáp thỏa mãn mình. Trong
-đó có key word `Bounding-box regression`, mình suy nghĩ rất nhiều, đọc cũng kha khá bài viết trên mạng mà vẫn không hiểu nổi. Một câu hỏi cứ
-lởn vởn trong đầu mình là các `bouding box` trong thuật toán yolo được tạo ra như thế nào ta, trước giờ mình chỉ dùng regression để predict 
-các biến liên tục vậy họ áp dụng để detection bounding box ra sao. Người ta build yolo là tổng hợp của rất nhiều thuật toán tạo nên bộ xương
-cho yolo .Thiết nghĩ những người mới lần đầu tập tọe vào deep learning như mình thì nên chia yolo từng phần để xử lý có lẽ sẽ dễ thở hơn. Trong
-bài hôm nay mình sẽ làm rõ `bounding box` được tạo ra từ regression như thế nào bằng một ví dụ rất đơn giản.
+Có hàng ngàn câu hỏi vì sao ở trong đầu mình hiện ra dù đi hỏi khắp nơi mà nhiều trong số đó vẫn chưa có lời giải đáp thỏa mãn mình. Trong đó có key word `Bounding-box regression`, mình suy nghĩ rất nhiều, đọc cũng kha khá bài viết trên mạng mà vẫn không hiểu nổi. Một câu hỏi cứ lởn vởn trong đầu mình là các `bouding box` trong thuật toán yolo được tạo ra như thế nào ta, trước giờ mình chỉ dùng regression để predict  các biến liên tục vậy họ áp dụng để detection bounding box ra sao. Người ta build yolo là tổng hợp của rất nhiều thuật toán tạo nên bộ xương cho yolo .Thiết nghĩ những người mới lần đầu tập tọe vào deep learning như mình thì nên chia yolo từng phần để xử lý có lẽ sẽ dễ thở hơn. Trong bài hôm nay mình sẽ làm rõ `bounding box` được tạo ra từ regression như thế nào bằng một ví dụ rất đơn giản.
 * Các bươc thực hiện :
   * Chuẩn bị dữ liệu .
   * Traing model .
   * Đánh giá model
+  
 ## Chuẩn bị dữ liệu .
 Dữ liệu 'input` là những image có object mà ta muốn detection và `ouput` là những bouding box sẽ có dạng (x,y,w,h). Trong đó x,y là tọa độ
 leftop của bounding box, (w,h) là width và height. Chúng ta sẽ mô phỏng dữ liệu như sau :
@@ -74,8 +70,10 @@ model.compile(optimizer="adadelta",loss="mse")
 model.summary()
 ~~~
   * Ta dùng 2 layers : layer 1 là 300 node,layer 2 là 100 node với activation là `relu`.Cuối cùng là một layer `dropout` với tỉ lệ 20%
-  * Optimizer bằng `adadelta` và loss là `mean square error`
-![summary](/assets/images/summary.jpg)
+  * Optimizer bằng `adadelta` và loss là `mean square error`.
+  
+  <div style="text-align: center ">![summary](/assets/images/summary.jpg) </div>
+
 * traing model
 ~~~ ruby
 model.fit(X_train,y_train,epochs=50,batch_size=200)
@@ -83,7 +81,9 @@ y_predict = model.predict(X_test)
 ~~
   * Training model với 50 epochs và batch size mỗi epochs là 200. Máy chạy cpu tầm chưa đến 1p
   * Sau đó predict test data dưới variable y_predict
-![training](/assets/images/training.jpg)
+  
+  <div style="text-align: center ">![training](/assets/images/training.jpg) </div>
+
 ## Đánh giá model
 Nhìn vào hình vẽ đầu tiền ta có nhận xét là : model predict tốt là khi đường viền màu đỏ và  `bounding box` nó càng sát nhau . Như vậy
 ta có thể dùng cái này để đánh giá model. Ta đã quen với khái niệm `IOU` là `Intersection over Union`. Có nghĩa là ta sẽ đánh giá model bằng tỉ lệ area overlap với area union giữa thực tế và predict. Sau đó tính mean là sẽ ra được tỉ lệ IOU của model . IOU càng cao có nghĩa model predict tốt và ngược lại.
