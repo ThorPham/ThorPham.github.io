@@ -41,4 +41,9 @@ for i in range(5000):
         image[i,y:y+h,x:x+w] = 1
 ~~~
 * Giải thích một tí :
-  *
+  * Ta sẽ tạo 5000 image có size (8,8) `image = np.zeros((5000,img_size,img_size))`. Image sẽ có background là white
+  * 5000 `bounding box` có size từ w,h từ 1-4 và có màu đen
+  * Mỗi image chỉ có duy nhất 1 object
+* Image sau khi tạo sẽ như thế này :
+![bounding_box](/assets/images/bounding.jpg)
+* Cái chúng ta cần predict là đường viền màu đỏ. Image sẽ có dimension là (5000, 8, 8) ,bounding box có dimension là (5000, 1, 4).
