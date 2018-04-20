@@ -8,7 +8,7 @@ categories: [python,computer_vision]
 tags: [python,computer_vision]
 ---
 ## Mở đầu .
-Facial landmark là xác định các vị trí như eye(mắt), nose(mũi),mount(miệng) trên khuôn mặt(face). Nó có rất nhiều ứng dụng vui mà ta thường thây
+Facial landmark là xác định các vị trí như eye(mắt), nose(mũi),mounth(miệng) trên khuôn mặt(face). Nó có rất nhiều ứng dụng vui mà ta thường thây
 trên các app điện thoại chẳng hạn ( swap face,draw in face or tạo hiệu ứng trên khuôn mặt). Trong bài này chúng ta sẽ tìm hiểu về thư viện
 Dlib trong python để xác định Facial landmark.
 * Mục lục
@@ -45,6 +45,30 @@ for d in rects:
   * Sau đó Load image và detection
   * Kết quả trả về sẽ là 1 list các face detection được. Mỗi face detection là 1 rectangle tuple theo cấu trúc (left,top),(right,bottom).
   * lưu ý có thể detection nhiều face trên một image.
+  
 ![face](/assets/images/dlib1.jpg)
 
 ## Face landmark với Dlib
+* Facical landmark có cầu trúc như hình bên dưới. Dlib sẽ detection 62 point trên khuôn mặt.
+  * Mouth point = 48-61
+  * Right_brow_point = 17-21
+  * Left_brow_point = 22-26
+  * Right_eye_point = 36-42
+  * Left_eye_pint = 42-48
+  * Nose_point = 27-35
+  * Jaw_point = 0-17
+![landmark](/assets/images/facial_landmark.jpg)
+~~~ ruby
+path = "shape_predictor_68_face_landmarks.dat"
+predict = dlib.shape_predictor(path)
+landmark = predict(im,rects[0])
+for idx,point in enumerate(landmark.parts()):
+    cv2.circle(im,(point.x,point.y),1,(0,255,0),1)
+    cv2.putText(im,str(idx),(point.x,point.y),fontFace=cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,
+                    fontScale=0.4,
+                    color=(0, 0, 255))
+cv2.imshow("im",im)
+cv2.waitKey()
+cv2.destroyAllWindows()
+~~~
+![landmark](/assets/images/facial_landmark1.jpg)
