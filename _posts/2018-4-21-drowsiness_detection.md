@@ -36,7 +36,6 @@ $$
 ## Xây dựng model .
 * Trước hết ta xây dựng các hàm helper .
 * Đầu tiên là hàm chuyển landmark point thành array . Vì mặc định nó rất khó xài.
-
 ~~~ ruby
 def landmark_transform(landmarks):
     land_mark_array = []
@@ -65,4 +64,45 @@ def draw_contours(image,cnt):
 ~~~ ruby
 def sound_alarm():
     playsound.playsound("sound.mp3")
+~~~
+* Bây giờ ta gộp các function helper đã tạo thành một model hoàn chỉnh.
+~~~ ruby
+path = "shape_predictor_68_face_landmarks.dat"
+detector = dlib.get_frontal_face_detector()
+predict_landmark = dlib.shape_predictor(path)
+
+cap = cv2.VideoCapture(0)
+total=0
+alarm=False
+while cap.isOpened() == True :
+    ret,frame = cap.read()
+    frame_gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+    rects = detector(frame_gray,1)
+    if len(rects) > 0 :
+        for i in rects:
+            cv2.rectangle(frame,(i.left(),i.top()),(i.right(),i.bottom()),(0,255,0),2)
+            land_mark = predict_landmark(frame_gray,i)
+            left_eye = landmark_transform(land_mark.parts()[36:42])
+            right_eye = landmark_transform(land_mark.parts()[42:48])
+            draw_contours(frame,left_eye)
+            draw_contours(frame,right_eye)
+            EAR_left,EAR_right = calculate_distance(left_eye),calculate_distance(right_eye)
+            ear = np.round((EAR_left+EAR_right)/2,2)
+            cv2.putText(frame, "EAR :" + str(ear) ,(200, 100),cv2.FONT_HERSHEY_SIMPLEX, 1.7, (0, 255, 0), 2)
+            if ear > 0.25 :
+                total=0
+                alarm=False
+                cv2.putText(frame, "Eyes Open ", (10, 30),cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0,255, 0 ), 2)
+            else:
+                total+=1
+                print(total)
+                if total>10:
+                    if not alarm:
+                        sound_alarm()
+                        cv2.putText(frame, "drowsiness detect" ,(10, 30),cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 2)
+    cv2.imshow("image", frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        cv2.destroyAllWindows()
+        cap.release()
+        break               
 ~~~
