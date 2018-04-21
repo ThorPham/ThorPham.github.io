@@ -15,6 +15,7 @@ thông để hạn chế tai nạn.
   * Tìm hiểu ý tưởng .
   * Xây dựng model .
   * Test model
+  
 ## Tìm hiểu ý tưởng .
 * Ý tưởng cũng rất đơn giản thôi, là chúng ta sẽ dựa vào facial landmark của eyes để xác định được tỉ lệ nào đó như một ngưỡng để xem xét
 mắt đang nhắm hay mở.Trong paper **Real-Time Eye Blink Detection using Facial Landmarks** của **Tereza Soukupova** và **Jan ´ Cech** đã
@@ -31,3 +32,37 @@ $$
    * Có 2 eye nên ta sẽ lấy trung bình của 2 eye để lấy EAR
    * Để tránh trường hợp nháy mắt hay hay detection sai ta sẽ cho EAR một khoảng thời gian đủ lâu để xác nhận là drowsiness.
    * Threshold sẽ do ta chọn theo ý muốn ta ta thấy hợp lý.
+
+## Xây dựng model .
+* Trước hết ta xây dựng các hàm helper .
+* Đầu tiên là hàm chuyển landmark point thành array . Vì mặc định nó rất khó xài.
+
+~~~ ruby
+def landmark_transform(landmarks):
+    land_mark_array = []
+    for i in landmarks:
+        land_mark_array.append([int(i.x),int(i.y)])
+    return np.array(land_mark_array)
+~~~
+* Tiếp theo là hàm tính EAR.
+~~~ ruby
+def calculate_distance(eye):
+    assert len(eye)== 6
+    p0,p1,p2,p3,p4,p5 = eye
+    distance_p1_p5 = np.sqrt((p1[0]-p5[0])**2 + (p1[1]-p5[1])**2)
+    distance_p2_p4 = np.sqrt((p2[0]-p4[0])**2 + (p2[1]-p4[1])**2)
+    distance_p0_p3 = np.sqrt((p0[0]-p3[0])**2 + (p0[1]-p3[1])**2)
+    EAR = (distance_p1_p5+distance_p2_p4)/(2*distance_p0_p3)
+    return EAR
+~~~
+* Tiếp theo là hàm vẽ contours cho eye để tiện theo dõi. Chúng ta dùng `convexhull` để xấp xỉ hình elip giống với eye.
+~~~ ruby
+def draw_contours(image,cnt):
+    hull = cv2.convexHull(cnt)
+    cv2.drawContours(image,[hull],-1,(0,255,0),2)
+~~~ 
+* Cuối cùng là hàm **alarm** (thông báo) khi drowsiness được phát hiện
+~~~ ruby
+def sound_alarm():
+    playsound.playsound("sound.mp3")
+~~~
