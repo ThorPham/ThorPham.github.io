@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Facial expression detection với CNN "
+title: "Facial expression detection với CNN keras "
 description: "nhận diện Facial expression"
 categories: [python,deep_learning]
 tags: [python,deep_learning]
