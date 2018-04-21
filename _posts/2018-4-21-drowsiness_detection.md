@@ -24,7 +24,7 @@ $$
 EAR =  \frac{||p_{2} - p_{6}|| + ||p_{3} - p_{5}||}{||p_{1} - p_{4}||}
 $$
 
-   ** Trong đó $p_{i}$ là lankmark point của eye, ký hiệu **|| ||** là khoảng cách euclide.
+   * Trong đó $p_{i}$ là lankmark point của eye, ký hiệu **|| ||** là khoảng cách euclide.
 ![drowsiness1](/assets/images/drowness1.jpg)
 * Trong đó p1,p2,p3,p4,p5,p6 là landmark point của eye(lưu ý ta sẽ ký hiệu bắt đầu bằng 0 thay vì bằng 1 trong model).Biểu đồ bên dưới là đồ thị của EAR . Khi mà eye ta thấy là EAR sẽ nằm dưới threshold 0.15 và bình thường của nó sẽ lớn hơn 0.25. 
 * Đó là ý tưởng của bài toán.Ở đây có 1 số lưu ý là :
