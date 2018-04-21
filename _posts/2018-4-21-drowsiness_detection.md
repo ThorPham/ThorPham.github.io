@@ -51,7 +51,7 @@ def calculate_distance(eye):
     distance_p1_p5 = np.sqrt((p1[0]-p5[0])**2 + (p1[1]-p5[1])**2)
     distance_p2_p4 = np.sqrt((p2[0]-p4[0])**2 + (p2[1]-p4[1])**2)
     distance_p0_p3 = np.sqrt((p0[0]-p3[0])**2 + (p0[1]-p3[1])**2)
-    EAR = (distance_p1_p5+distance_p2_p4)/(2*distance_p0_p3)
+    EAR = (distance_p1_p5 + distance_p2_p4)/(2*distance_p0_p3)
     return EAR
 ~~~
 * Tiếp theo là hàm vẽ contours cho eye để tiện theo dõi. Chúng ta dùng `convexhull` để xấp xỉ hình elip giống với eye.
@@ -74,7 +74,7 @@ predict_landmark = dlib.shape_predictor(path)
 
 cap = cv2.VideoCapture(0)
 total=0
-alarm=False
+alarm = False
 while cap.isOpened() == True :
     ret,frame = cap.read()
     frame_gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
@@ -107,3 +107,15 @@ while cap.isOpened() == True :
         cap.release()
         break               
 ~~~
+
+* Giải thích code một tí .( lưu ý các tham số do mình chọn các bạn có thể điều chỉnh theo ý mình).
+  * Ta sẽ không nhắc lại cách tìm facial landmark với faced detection với Dlib( bạn đọc có thể xem lại ở bài trước)
+  * Các thông số ta đặt trong model : threshold của EAR là 0.25(nhỏ hơn sẽ xem là close eye)
+  * Point landmark của eye: left_eye : 37-42,right_eye : 43-49
+  * Ta sẽ đếm số lần eye close nếu nó vượt quá 10 thì sẽ có "alarm" qua biến là `total`
+  * `detector` và `predict_landmark` dùng để detection face và landmark
+  * Nếu `detector` thấy face thì ta sẽ tính` EAR_left` và `EAR_right` sau đó tính trung bình được `ear`
+  * Cuối cùng xem xét điều kiện neeys total >10 thì sẽ `alarm`
+
+## Test model.
+* Ta sẽ test thử model. Vì máy mình cũ và webcame rất tối nên nhiều khi bị lag hoặc đứng hình.
