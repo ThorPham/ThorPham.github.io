@@ -66,6 +66,7 @@ def sound_alarm():
     playsound.playsound("sound.mp3")
 ~~~
 * Bây giờ ta gộp các function helper đã tạo thành một model hoàn chỉnh.
+
 ~~~ ruby
 path = "shape_predictor_68_face_landmarks.dat"
 detector = dlib.get_frontal_face_detector()
