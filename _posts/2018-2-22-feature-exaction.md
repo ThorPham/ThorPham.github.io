@@ -57,7 +57,7 @@ image processing thì khái niệm đạo hàm rất quan trọng. Nó là cơ s
 
 ![hog](/assets/images/hog.jpg)
 
-* Các bước tính hog. Xét trên 1 cell như trong ảnh là 8x8:
+* Các bước tính hog cụ thể. Xét trên 1 cell như trong ảnh là 8x8:
     * 1, Tính đạo hàm của image theo x,y
     $$
     \begin{align*}
@@ -79,6 +79,6 @@ $$
   * 2, Tính magitude $g = \sqrt{ g_x^2 + g_y^2 }$ và direction $\theta = \arctan{(g_y / g_x)}$
   * 3, Chia magitude theo 9 bins( có hướng theo direction từ 0-180 mỗi bin 20)
   * 4, Lưu ý trên 1 block 16x16 thì để tránh ảnh hưởng của độ sáng tối ảnh hưởng tới image người ta sẽ chuẩn hóa gradient(Normalizing Gradient Vectors). Vì như chúng ta biết khi chuẩn hóa cộng hoặc trừ 1 đại lượng trên image sẽ ko làm thay đổi gradient.
-* Ảnh minh họa cách đưa magitude vào bine theo direction  
+* Ảnh minh họa cách đưa magitude vào bin theo direction  
   ![histogram](https://www.learnopencv.com/wp-content/uploads/2016/12/hog-histogram-1.png)
 
