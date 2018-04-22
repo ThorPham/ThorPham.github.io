@@ -83,3 +83,5 @@ $$
 * Ảnh minh họa cách đưa magitude vào bin theo direction  
   ![histogram](https://www.learnopencv.com/wp-content/uploads/2016/12/hog-histogram-1.png)
 
+* Code trong python : Ta có thể dùng opencv hoặc skimage để tính hog.
+  * Trong opencv: 
