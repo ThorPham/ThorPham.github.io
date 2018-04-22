@@ -33,6 +33,7 @@ $$
 \end{cases}
  $$
 * Code trong python với skimage
+
 ~~~ ruby
 import numpy as np
 from skimage import io
