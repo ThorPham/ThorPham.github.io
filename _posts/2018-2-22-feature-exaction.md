@@ -32,3 +32,23 @@ $$
   0, & \text{otherwise}.
 \end{cases}
  $$
+* Code trong python với skimage
+~~~ ruby
+import numpy as np
+from skimage import io
+from skimage.feature import local_binary_pattern
+from matplotlib import pyplot as plt
+%matplotlib inline
+
+im = io.imread("image.png",as_grey=True)
+lbp = local_binary_pattern(im,8,1,method="uniform")
+plt.figure(figsize=(25,25))
+plt.subplot(1,3,1)
+plt.imshow(im,cmap="gray")
+plt.subplot(1,3,2)
+plt.imshow(lbp,cmap="gray")
+~~~
+
+![lbp3](/assets/images/lbp3.jpg)
+
+# Histogram Oriented of Gradient
