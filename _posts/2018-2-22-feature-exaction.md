@@ -13,11 +13,17 @@ redirect_from:
 (local texture) của image bằng cách so sánh mỗi pixel với các pixel lân cận nó(neighbors).Ta sẽ đặt một pixel là trung tâm(center) và so sánh
 với các pixel lân cận với nó, nếu pixel trung tâm lớn hơn hoặc bằng pixel lân cận thì nó sẽ trả về giá trị 1, ngược lại 0. Ví dụ chúng ta
 lấy bán kính 8 pixel lân cận thì lbp sẽ có dạng 11001111, là một chuỗi nhị phân để đơn giản và dễ đọc hơn ta sẽ chuyển về dạng decimal 207.
+
+![LBP](/assets/images/lbp.jpg)
+
 * Công thức LBP như sau :
+
 $$
 LBP_{r,p} = \sum_{n=0}^{p-1}S(X_{r,p,n}-X_{p})2^{n}
 $$
+
  trong đó :
+ 
  $$ 
  S(x) =  \begin{cases}
   1, & \text{if } x >= 1, \\
