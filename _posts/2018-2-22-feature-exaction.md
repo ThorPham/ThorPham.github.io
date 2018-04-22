@@ -52,3 +52,5 @@ plt.imshow(lbp,cmap="gray")
 ![lbp3](/assets/images/lbp3.jpg)
 
 # Histogram Oriented of Gradient
+* Histogram Oriented of Gradient (Hog) là một feature descriptor thường được dùng trong object recognition. Như chúng ta đã biết trong
+image processing thì khái niệm đạo hàm rất quan trọng. Nó là cơ sở của rất nhiều thuật toán như edge,coner detection. Dựa vào đặc điểm này người ta mới xây dựng nó làm feature trên cơ sở derivative. Đạo hàm của image là một matrix theo ox và oy nó có 2 đặc trưng là độ lớn(magnitude) và hướng(direction). Để làm feature trên image thì không thể để 2 đại lượng này rời rạc được nên người ta mới nghĩ ra phương pháp chuẩn hóa nó (quantization) đó là đưa nó về dạng histogram của magnitude theo direction.Bây giờ ta tìm hiểu các bước tính toán ra hog.
