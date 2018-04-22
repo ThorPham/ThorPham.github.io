@@ -56,3 +56,29 @@ plt.imshow(lbp,cmap="gray")
 image processing thì khái niệm đạo hàm rất quan trọng. Nó là cơ sở của rất nhiều thuật toán như edge,coner detection. Dựa vào đặc điểm này người ta mới xây dựng nó làm feature trên cơ sở derivative. Đạo hàm của image là một matrix theo ox và oy nó có 2 đặc trưng là độ lớn(magnitude) và hướng(direction). Để làm feature trên image thì không thể để 2 đại lượng này rời rạc được nên người ta mới nghĩ ra phương pháp chuẩn hóa nó (quantization) đó là đưa nó về dạng histogram của magnitude theo direction.Bây giờ ta tìm hiểu các bước tính toán ra hog.
 
 ![hog](/assets/images/hog.jpg)
+
+* Các bước tính hog. Xét trên 1 cell như trong ảnh là 8x8:
+    * 1, Tính đạo hàm của image theo x,y
+    $$
+    \begin{align*}
+\nabla f(x, y)
+= \begin{bmatrix}
+  g_x \\
+  g_y
+\end{bmatrix}
+= \begin{bmatrix}
+  \frac{\partial f}{\partial x} \\[6pt]
+  \frac{\partial f}{\partial y}
+\end{bmatrix}
+= \begin{bmatrix}
+  f(x, y+1) - f(x, y-1)\\
+  f(x+1, y) - f(x-1, y)
+\end{bmatrix}
+\end{align*}
+$$
+  * 2, Tính magitude $g = \sqrt{ g_x^2 + g_y^2 }$ và direction $\theta = \arctan{(g_y / g_x)}$
+  * 3, Chia magitude theo 9 bins( có hướng theo direction từ 0-180 mỗi bin 20)
+  * 4, Lưu ý trên 1 block 16x16 thì để tránh ảnh hưởng của độ sáng tối ảnh hưởng tới image người ta sẽ chuẩn hóa gradient(Normalizing Gradient Vectors). Vì như chúng ta biết khi chuẩn hóa cộng hoặc trừ 1 đại lượng trên image sẽ ko làm thay đổi gradient.
+  
+  !(histogram)[https://www.learnopencv.com/wp-content/uploads/2016/12/hog-histogram-1.png]
+
