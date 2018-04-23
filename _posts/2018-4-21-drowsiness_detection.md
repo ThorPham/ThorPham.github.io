@@ -119,5 +119,4 @@ while cap.isOpened() == True :
 
 ## Test model.
 * Ta sẽ test thử model. Vì máy mình cũ và webcame rất tối nên nhiều khi bị lag hoặc đứng hình.
-<iframe src="https://www.youtube.com/watch?v=oROrBeClnec"   
-width="640" height="360" frameborder="0" ></iframe>
+<iframe width="480" height="360" src="https://www.youtube.com/watch?v=oROrBeClnec" frameborder="0"> </iframe>
