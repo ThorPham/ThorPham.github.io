@@ -115,7 +115,9 @@ while cap.isOpened() == True :
   * Ta sẽ đếm số lần eye close nếu nó vượt quá 10 thì sẽ có "alarm" qua biến là `total`
   * `detector` và `predict_landmark` dùng để detection face và landmark
   * Nếu `detector` thấy face thì ta sẽ tính` EAR_left` và `EAR_right` sau đó tính trung bình được `ear`
-  * Cuối cùng xem xét điều kiện neeys total >10 thì sẽ `alarm`
+  * Cuối cùng xem xét điều kiện nếu total >10 thì sẽ `alarm`
 
 ## Test model.
 * Ta sẽ test thử model. Vì máy mình cũ và webcame rất tối nên nhiều khi bị lag hoặc đứng hình.
+<iframe src="https://www.youtube.com/watch?v=oROrBeClnec"   
+width="640" height="360" frameborder="0" ></iframe>
