@@ -26,6 +26,7 @@ from sklearn.metrics import accuracy_score
 (X_train,y_train),(X_test,y_test) = mnist.load_data()
 ~~~
 * Tiếp theo ta sẽ tính hog. Ta dùng orientations=9,pixels_per_cell=(14,14),cells_per_block=(1,1).
+
 ~~~ ruby
 #cho x_train
 X_train_feature = []
@@ -41,13 +42,16 @@ for i in range(len(X_test)):
     X_test_feature.append(feature)
 X_test_feature = np.array(X_test_feature,dtype=np.float32)
 ~~~
+
 * Tiếp theo ta build model vào predict
+
 ~~~ ruby
 model = LinearSVC(C=10)
 model.fit(X_train_feature,y_train)
 y_pre = model.predict(X_test_feature)
 print(accuracy_score(y_test,y_pre))
 ~~~
+
 * Accuracy là 88% không cao lắm. Ta có thể điều chỉnh các tham số để tăng độ chính xác của model.
 ## Predict trên ảnh có nhiều ditgit
 * Đến bước này ta sẽ dùng opencv, đầu tiên ta sẽ xử lý ảnh và tìm contours của digit trên image.
@@ -63,12 +67,14 @@ im,thre = cv2.threshold(im_blur,90,255,cv2.THRESH_BINARY_INV)
 _,contours,hierachy = cv2.findContours(thre,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 rects = [cv2.boundingRect(cnt) for cnt in contours]
 ~~~
+
 * Gải thích code một tí hem:
   * Đầu tiên convert color sang gray color
   * Tiếp theo giảm nhiễu bằng Gaussian( tùy thuộc image mà ta xử lý khác nhau)
   * Tiếp theo dùng threshold chuyển về ảnh binary
   * Cuối cùng là tìm contour và vẽ bouding box 
 * Sau đó predict ditgit của mỗi box.
+
 ~~~ ruby
 for i in contours:
     (x,y,w,h) = cv2.boundingRect(i)
@@ -87,6 +93,7 @@ cv2.imwrite("image_pand.jpg",image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 ~~~
+
 * Ta được kết quả như sau:
 ![digit_predict](/assets/images/image_pand.jpg)
-* Một số lưu ý là : Ta nên padding cho mỗi digit một khoảng nào đó tránh trường hợp digit ko có backgroud sẽ khó predict. Tuy thuật toán hog + svm này có độ chính xác không cao bằng các thuật toán trong deep learning nhưng nó vẫn tạm chấp nhận được.Mình viết bài này để mọi người hình dung được các bước thực hiện thuật toán và các predict khi detection multi digit.
+* Một số lưu ý là : Ta nên padding cho mỗi digit một khoảng nào đó tránh trường hợp digit ko có background sẽ khó predict. Tuy thuật toán hog + svm này có độ chính xác không cao bằng các thuật toán trong deep learning nhưng nó vẫn tạm chấp nhận được.Mình viết bài này để mọi người hình dung được các bước thực hiện thuật toán và các predict khi detection multi digit.
