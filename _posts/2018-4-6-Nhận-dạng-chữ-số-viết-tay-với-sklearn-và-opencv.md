@@ -95,5 +95,7 @@ cv2.destroyAllWindows()
 ~~~
 
 * Ta được kết quả như sau:
+
 ![digit_predict](/assets/images/image_pand.jpg)
+
 * Một số lưu ý là : Ta nên padding cho mỗi digit một khoảng nào đó tránh trường hợp digit ko có background sẽ khó predict. Tuy thuật toán hog + svm này có độ chính xác không cao bằng các thuật toán trong deep learning nhưng nó vẫn tạm chấp nhận được.Mình viết bài này để mọi người hình dung được các bước thực hiện thuật toán và các predict khi detection multi digit.
