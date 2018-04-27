@@ -7,18 +7,18 @@ tags: [python,machine learning]
 redirect_from:
   - /2018/04/11/
 ---
-Object regconite bao gồm 2 phần việc đó là object classifier và  object detecter. Hiểu một cách đơn giản đó là nếu chúng ta muốn máy tính nhận dạng được con mèo hay con chó thì trước tiên nó sẽ phải detecter đối tượng đó trên image và sau đó xem đối tượng đó là cái gì bằng cách classifier .Với sự phát triển của deep learning như hiện nay đã có rất nhiều thuật toán giúp ta giải quyết vấn đề này như R-CNN,Fast or Faster R-CNN,YOLO hay SSD với tốc độ xử lý nhanh và độ chính xác cao. Tuy vậy những cách truyền thống vẫn là sự lựa chon tốt khi mà chúng ta có ít dữ liệu và muốn build một model nào đó đơn giản hơn những cái phức tạp hơn như deep learning. Trong bài này chúng ta sẽ nhận diện pedestrian bằng phương pháp cổ điển trong computer vision và sau đó bạn có thể tự build một model custom nào đó theo ý của bạn .Thuật toán sử dụng trong bài là HOG + SVM + Window search
+Object regconite bao gồm 2 phần việc đó là object classifier và  object detection. Hiểu một cách đơn giản đó là nếu chúng ta muốn máy tính nhận dạng được con mèo hay con chó thì trước tiên nó sẽ phải detecter đối tượng đó trên image và sau đó xem đối tượng đó là cái gì bằng cách classifier .Với sự phát triển của deep learning như hiện nay đã có rất nhiều thuật toán giúp ta giải quyết vấn đề này như R-CNN,Fast or Faster R-CNN,YOLO hay SSD với tốc độ xử lý nhanh và độ chính xác cao. Tuy vậy những cách truyền thống vẫn là sự lựa chon tốt khi mà chúng ta có ít dữ liệu và muốn build một model nào đó đơn giản hơn những cái phức tạp hơn như deep learning. Trong bài này chúng ta sẽ nhận diện pedestrian bằng phương pháp cổ điển trong computer vision và sau đó bạn có thể tự build một model custom nào đó theo ý của bạn .Thuật toán sử dụng trong bài là HOG + SVM + Window search
 
 Cách bước thực hiện ta chia làm 2 giai đoạn tương ứng với classifier và detecter :
 * Giai đoạn 1 classifier
-1, Chuẩn bị dữ liệu
-2,Trích chọn đặc trưng
-3,Build model
-4,Đánh giá và cải thiện model
-* Giai đoạn 2  Detecter
-1, Xây dựng sliding window
-2, Xây dựng NMS(non-maxinum-suppression)
-3, Detecter
+  * 1, Chuẩn bị dữ liệu
+  * 2,Trích chọn đặc trưng
+  * 3,Build model
+  * 4,Đánh giá và cải thiện model
+* Giai đoạn 2  Detection
+  * 1, Xây dựng sliding window
+  * 2, Xây dựng NMS(non-maxinum-suppression)
+  * 3, Detecter
 # Giai đoạn 1 classifier
 1, Chuẩn bị dữ liệu
 Dữ liệu chúng ta cần chuẩn bị gồm 2 phần . Một là positive sample ( gọi tắt là pos) là data pedestrian và chúng ta gắn label cho nó là 1. Thứ hai là negative sample (Neg) là dữ liệu không chứa pedestrian bạn có thể lấy như background, car, house ... và ta gắn nhãn là -1.(lưu ý nếu training trong opecv thì nhãn gắn bắt buộc là 1 và -1 ).
@@ -180,7 +180,7 @@ def nms(detections,threshold =0.4):
 ~~~
 * Ý tưởng là chúng ta sẽ sort các detection theo score( decision_function) theo thứ tự giảm dần. Sau đó so sánh các detection với nhau, nếu area overlap hơn threshold thì ta sẽ giữ lại detection nào có score lớn hơn.
 ## 3, Detecter
-* Single object trên mỗi image
+* Đến đây ta sẽ stack các function đã tạo lại với nhau thành một khối để detection trên ảnh lớn.
 
 ~~~ ruby
 image = cv2.imread("pedestrian.jpg")
@@ -208,7 +208,14 @@ cv2.imshow("roi",image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 ~~~
+* Giải thích code 1 tí:
+  * Vì window size cố định mà object mỗi image sẽ có kích thước khác nhau nên ta sẽ dùng 1 function tạo image pyramid, trong bài ta sẽ sử dụng pyramid_gaussian với downscale = 2 , có nghĩa sau mỗi lần chạy image sẽ giảm xuống 1 nữa
+  * Để giảm bớt nhiễu ta sẽ sử dụng score > 0.25
+  * Ở đây có một nhược điểm là khi image downscale thì bounding box của ta sẽ không đổi làm cho object không được bao toàn bộ bởi bounding box mình định sẽ tăng kích thước bounding box bằng cách nhân cho nó 1 tỷ lệ bằng (downscale^scale) nhưng kết quả là bouding box quá to. Hiện giờ mình chưa tìm ra cách xử lý. Có thể xem minh họa ở hình dưới.
 ![output](/assets/images/final1.jpg)
 
 ![output](/assets/images/final2.jpg)
 
+
+* Kết luận :
+* Thuật toán build model nhanh tuy nhiên có một nhược điểm là predict trên camera rất delay bởi vì ta sử dụng window search nên predict rất nhiều image dẫn đến tốn thời gian rất nhiều. Ngày nay người ta đã giải quyết được vấn đề này bằng cách sử dụng selective search có nghĩa là ko search windown toàn image nữa mà search có chọn lọc, những region proposal mà có nhiều khẳn năng có object nhất điển hình là thuật toán R-CNN.
