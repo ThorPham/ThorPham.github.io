@@ -94,7 +94,9 @@ print(classification_report(y_train,y_predict))
 ~~~
 * Kết quả như sau :
 
+
 ![confustion_matrix](/assets/images/confustion_matrix.jpg)
+
 
 * Amazing! kết quả accuracy = 100% . Quá cao phải ko. Nhưng đừng mừng vội vì data của chúng ta rất nhỏ và ta dùng toàn bộ data vào training mà ko chia ra data testing nên rất có thể bị overfiting. Khi đó model đưa vào hoạt động sẽ predict không tốt. Để tránh điều này
 ta có thể thay đổi threshold  ( vì khi predict trên image lớn sẽ có rất nhiều non-pedestrian hơn là pedestrian).Ở trong sklearn mặc định `model.prediction` là 0.5 nên ta không thể nào thay đổi được nó. Ta chỉ có thể thay đổi qua `decision_function`
@@ -117,6 +119,7 @@ plot_precision_recall_vs_threshold(precisions, recalls, thresholds)
 ~~~
 
 ![recall](/assets/images/recall.jpg)
+
 
 * Ta thấy khi threshold = 0 recall = 1 , khi recall = 0.8 thì threshold tăng lên 0.7
 # Giai đoạn 2  Detecter
@@ -212,7 +215,9 @@ cv2.destroyAllWindows()
   * Vì window size cố định mà object mỗi image sẽ có kích thước khác nhau nên ta sẽ dùng 1 function tạo image pyramid, trong bài ta sẽ sử dụng pyramid_gaussian với downscale = 2 , có nghĩa sau mỗi lần chạy image sẽ giảm xuống 1 nữa
   * Để giảm bớt nhiễu ta sẽ sử dụng score > 0.25
   * Ở đây có một nhược điểm là khi image downscale thì bounding box của ta sẽ không đổi làm cho object không được bao toàn bộ bởi bounding box mình định sẽ tăng kích thước bounding box bằng cách nhân cho nó 1 tỷ lệ bằng (downscale^scale) nhưng kết quả là bouding box quá to. Hiện giờ mình chưa tìm ra cách xử lý. Có thể xem minh họa ở hình dưới.
+  
 ![output](/assets/images/final1.jpg)
+
 
 ![output](/assets/images/final2.jpg)
 
