@@ -121,3 +121,5 @@ while cap.isOpened() == True :
 * Ta sẽ test thử model. Vì máy mình cũ và webcame rất tối nên nhiều khi bị lag hoặc đứng hình.
 [https://www.youtube.com/watch?v=oROrBeClnec]
 <div class="x-frame video" data-video="https://www.youtube.com/watch?v=oROrBeClnec"> </div>
+
+* Tham Khảo : http://hanzratech.in/, https://pyimagesearch.com, learnopencv.com
