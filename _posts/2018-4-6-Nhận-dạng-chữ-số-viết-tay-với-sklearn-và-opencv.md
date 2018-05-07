@@ -9,7 +9,6 @@ redirect_from:
 ---
 ## Mở đầu
 Có rất nhiều thuật toán để nhận diện chữ số viết tay (hand writen digit) như neural network,CNN với độ chính xác rất cao lên tới 99%. Nhưng cũng không nên phủ nhận các thuật toán áp dụng theo kiểu truyền thống tuy vẫn có nhiều ưu điểm là đơn giản và chi phí tính toán thâp.Trong bài viết này chúng ta cùng tìm hiểu Hog(histogram of oriented gradient) và svm( support vector machine) để nhận dạng chữ số viết tay trên bộ dữ liệu MNIST.
-
 * Cấu trúc bài viết:
   * Xây dựng model nhận diện digit.
   * Predict trên ảnh có nhiều ditgit
