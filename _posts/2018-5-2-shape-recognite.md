@@ -14,6 +14,6 @@ Model sử dụng python cùng các thư viện keras(tensorflow backend), openc
 
 Thời gian training tầm 10 p, accuracy training data là 95%,testing data là 94%.
 
-Đây là video demo. Mình mới bổ sung giọng chị google.Link !(github)[https://github.com/ThorPham/shape-recognition]
+Đây là [video demo][https://www.youtube.com/watch?v=4FC4gqbDOZI]. Mình mới bổ sung giọng chị google.Link [github][https://github.com/ThorPham/shape-recognition]
 
 
