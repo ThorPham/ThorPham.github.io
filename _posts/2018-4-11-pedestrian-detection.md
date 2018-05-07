@@ -224,3 +224,5 @@ cv2.destroyAllWindows()
 
 * Kết luận :
 * Thuật toán build model nhanh tuy nhiên có một nhược điểm là predict trên camera rất delay bởi vì ta sử dụng window search nên predict rất nhiều image dẫn đến tốn thời gian rất nhiều. Ngày nay người ta đã giải quyết được vấn đề này bằng cách sử dụng selective search có nghĩa là ko search windown toàn image nữa mà search có chọn lọc, những region proposal mà có nhiều khẳn năng có object nhất điển hình là thuật toán R-CNN.
+
+* Tham Khảo : http://hanzratech.in/, https://pyimagesearch.com, learnopencv.com
