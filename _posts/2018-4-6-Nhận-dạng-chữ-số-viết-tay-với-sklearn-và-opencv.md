@@ -3,7 +3,7 @@ layout: post
 title: "Nhận dạng chữ số viết tay với sklearn và opencv"
 description: "nhận dạng chữ số viết tay với HOG và SVM"
 categories: [Machine_learning]
-tags: [random, jekyll]
+tags: [python,opencv]
 redirect_from:
   - /2018/04/6/
 ---
