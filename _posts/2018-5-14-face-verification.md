@@ -18,4 +18,4 @@ database ta sử dụng 1 threshold làm ngưỡng.Model này mình dùng pre-tr
 Người ta sử dụng inception network thay cho simple CNN . Inception network có ưu điểm giúp mạng training sâu hơn bằng cách 2,3 layer 
 convolution cùng 1 lúc sau đó concanation nó lại.
 * Video demo : [video](https://www.youtube.com/watch?v=e00wwMXM9-Y&feature=youtu.be)
-* link github : Bổ sung sau
+* link github : [git](https://github.com/ThorPham/facenet)
