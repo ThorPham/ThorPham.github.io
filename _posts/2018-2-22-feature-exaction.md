@@ -17,6 +17,7 @@ lấy bán kính 8 pixel lân cận thì lbp sẽ có dạng 11001111, là một
 ![LBP](/assets/images/lbp.jpg)
 
 * Cách tính này có hạn chế đó là chỉ giới hạn 3x3 pixel không đủ để mô tả các cấu trúc large scale nên người ta mở rộng khái niệm LBP bằng cách định nghĩa thêm 2 tham số là (P,R) trong đó P là số pixel lân cận xem xét  và R là bán kính ta quét từ pixel trung tâm. Như hình bên dưới.
+
 ![LBP2](/assets/images/lbp2.jpg)
 * Công thức LBP như sau :
 
@@ -84,4 +85,7 @@ $$
   ![histogram](https://www.learnopencv.com/wp-content/uploads/2016/12/hog-histogram-1.png)
 
 * Code trong python : Ta có thể dùng opencv hoặc skimage để tính hog.
-  * Trong opencv: 
+  * Trong opencv: `cv2.HOGDescriptor` với các tham số win_size,block_size,block_stride,cell_size,num_bín
+  * Trong skimage : `fucntion hog` với các tham số orientations, pixels_per_cell,cells_per_block
+## SIFT
+* Còn sift với các biến thể của nó bổ sung sau
