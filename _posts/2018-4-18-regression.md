@@ -54,16 +54,18 @@ for i in range(4):
 ## Traing model.
 * Chúng ta sẽ dùng một mạng neural network đơn giản để training với library keras. Ở đây người ta gọi `Bounding-box regression` trong khi dùng neural network training, rất nhiều người lầm tưởng là dùng `simple regression`. Hãy mở rộng khái niệm `regression` ra một tí, nó là bài toán predict khi output là biến liên tục. Vì bounding box ở đây (x,y,w,h) là bốn biến liên tục nên ta gọi là bài toán regression.
 * Đầu tiên chúng ta sẽ reshape các biến trước khi đưa vào model. Cũng có thể normalizer trước khi training để thuật toán hội tụ nhanh hơn. Nhưng do ảnh kích thước nhỏ và là binary nên không cần thiết . Sau đó chia dữ liệu thành training và testing với test_size = 0.3
-~~~ ruby
+{% highlight ruby %}
 from sklearn.model_selection import train_test_split
 X = image.reshape((5000,-1))
 y = bboxes.reshape((5000,-1))
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.3,random_state=10)
-~~~
+{% endhighlight %}
+
    * X sẽ có chiều là (5000,64) 
    * y có chiều là (5000,4)
 * Build model.
-~~~ ruby
+
+{% highlight ruby %}
 from keras.models import Sequential
 from keras.layers import Dense,Dropout,Activation
 
@@ -75,9 +77,8 @@ model.add(Activation("relu"))
 model.add(Dense(4))
 model.compile(optimizer="adadelta",loss="mse")
 model.summary()
-~~~
-~~~
-~~~
+{% endhighlight %}
+
   * Ta dùng 2 layers : layer 1 là 300 node,layer 2 là 100 node với activation là `relu`.Cuối cùng là một layer `dropout` với tỉ lệ 20%
   * Optimizer bằng `adadelta` và loss là `mean square error`.
   
