@@ -17,5 +17,5 @@ Embbeding thành vector 128 dimension. Sau đó dùng feature này classifier d�
 database ta sử dụng 1 threshold làm ngưỡng.Model này mình dùng pre-traning của openface training trên 100k image với hơn 500 people.
 Người ta sử dụng inception network thay cho simple CNN . Inception network có ưu điểm giúp mạng training sâu hơn bằng cách 2,3 layer 
 convolution cùng 1 lúc sau đó concanation nó lại.
-* Video demo : (https://www.youtube.com/watch?v=e00wwMXM9-Y&feature=youtu.be)
+* Video demo : [video](https://www.youtube.com/watch?v=e00wwMXM9-Y&feature=youtu.be)
 * link github : Bổ sung sau
