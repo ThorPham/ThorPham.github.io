@@ -89,9 +89,7 @@ for name in names :
         label.append(name_index[name])
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.decomposition import PCA,RandomizedPCA
-from sklearn.lda import LDA
+from sklearn.decomposition import RandomizedPCA
 from sklearn.metrics import accuracy_score
 
 mean = np.mean(data,axis=0)
