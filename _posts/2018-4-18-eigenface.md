@@ -58,4 +58,82 @@ tin quan trọng từ data,phát hiện và loại bỏ outlier và giảm chi�
   * Không phải tất cả các vị trí trên image đều quan trọng
 * Vì vậy PCA giúp ta khắc phục các nhược điểm này , nó giúp ta giảm chiều dữ liệu mà vẫn giữ lại được những thông tin quan trọng trên image.
 * Các bước thực hiện thuật toán .
+  * Chuẩn bị dữ liệu : Face nên được alignment và có cùng kích thước NxN sau đó chuẩn hóa bằng cách chia 255.
+  * Image sau đó được Flatten thành 1xN^2 pixel, chúng ta có M image nên data sẽ có chiều MxN^2
+  * Sau đó chúng ta tính mean và tính toán covariance như ở thuật toán PCA ở trên
+  * Điểm khác biệt ở đây là covarian có chiều N^2xN^2 quá lớn để tính trực tiếp eigen vector và egien value nên có 1 cái trick ở đây đó
+  là người ta sẽ tính eigen vector của MxM( vì MxM có kích thước nhỏ hơn nhiều so với N^2xN^2). Sau đó tính ngược lại cho N^2xN^2
+  * Cuối cùng chọn số eigen vector để chiếu data sang không gian mới lấy nó là feature để training.
+## Build model
+* Chúng ta có thể tự xây dựng model hoặc dùng thư viện có sẵn trong opencv chẳng hạn:
+* Data set bộ data 2k image 12 ca sỹ việt nam đã aligmnet
+* Code với sklearn :
+~~~ ruby
+import numpy as np
+import os
+import glob
+import cv2
+--->get data and precessing
+names = ["bao thy","chi pu","dam vinh hung","dan truong","ha anh tuan","ho ngoc ha",
+         "huong tram","lam truong","my tam","No phuoc thing","son tung","tuan hung"]
+name_index = {name:index for index,name in enumerate(names)}
+index_name = {index:name for index,name in enumerate(names)}
+
+label = []
+data = []
+for name in names :
+    paths = glob.glob(".//" +name +"//*.png")
+    for path in paths:
+        image = cv2.imread(path,0)
+        data.append(image.flatten())
+        label.append(name_index[name])
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.decomposition import PCA,RandomizedPCA
+from sklearn.lda import LDA
+from sklearn.metrics import accuracy_score
+
+mean = np.mean(data,axis=0)
+data_normal = data-mean
+pca = PCA(n_components=100,svd_solver='randomized',whiten=True)
+X = pca.fit_transform(data_normal)
+==> split data to train and test
+X_train,X_test, y_train,y_test = train_test_split(X,label,test_size=0.3,shuffle=True)
+==> build model
+svm = SVC(C=10)
+svm.fit(X_train,y_train)
+y_pre = svm.predict(X_test)
+print(accuracy_score(y_test,y_pre))
+~~~
+* Accuarcy chỉ có 62% thôi ha. Tương đối thấp vì PCA là 1 feature extraction dạng shadow learning nên feature chỉ làm việc tốt đối với
+những image có sự khác biệt lớn về structer and texture như chó mèo.. Còn face thì khó hơn ta có thể dùng các kỹ thuật feature của deep
+learning để training. Bạn có thể đọc ở bài face veritication.
+* Build với Opencv
+* Tương đối đơn giản nên mình chỉ show gợi ý thôi :
+* Đầu tiên khởi tạo model và training model như sau :
+~~~ruby
+recognizer = cv2.face.EigenFaceRecognizer_create()
+recognizer.train(Faces,IDs)
+~~~
+* Sau đó lưu file dưới dạng yml :`recognizer.save("recognier.yml")`
+* Cuối cùng là recognition realtime
+~~~ ruby
+cascade = cv2.CascadeClassifier("haarcascade_frontalface_alt.xml")
+ # Use urllib to get the image and convert into a cv2 usable format
+image = cv2.imread("my_tam.png")
+frame_gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+detection = cascade.detectMultiScale(frame_gray,scaleFactor=1.3,minNeighbors=5)
+for (x,y,w,h) in detection:
+    cv2.rectangle(image,(x,y),(x+w,y+h),(0,255,0),2)
+    roi = frame_gray[y:y+h,x:x+w]
+    roi = imutils.resize(roi,width=96,height=96)
+    single = recognizer.predict(roi)[0]
+    print(index_name[single])
+    cv2.putText(image,index_name[single],(int(x),int(y-10)),cv2.FONT_HERSHEY_COMPLEX_SMALL,2,(0,0,255),2)
+cv2.imshow("frame",image)
+cv2.waitKey()
+cv2.destroyAllWindows()
+~~~
+* Tham khảo : http://blog.manfredas.com/eigenfaces-tutorial/,bài giảng computer vision của thầy Mubarak 
 
