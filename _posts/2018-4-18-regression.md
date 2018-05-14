@@ -54,6 +54,7 @@ for i in range(4):
 ## Traing model.
 * Chúng ta sẽ dùng một mạng neural network đơn giản để training với library keras. Ở đây người ta gọi `Bounding-box regression` trong khi dùng neural network training, rất nhiều người lầm tưởng là dùng `simple regression`. Hãy mở rộng khái niệm `regression` ra một tí, nó là bài toán predict khi output là biến liên tục. Vì bounding box ở đây (x,y,w,h) là bốn biến liên tục nên ta gọi là bài toán regression.
 * Đầu tiên chúng ta sẽ reshape các biến trước khi đưa vào model. Cũng có thể normalizer trước khi training để thuật toán hội tụ nhanh hơn. Nhưng do ảnh kích thước nhỏ và là binary nên không cần thiết . Sau đó chia dữ liệu thành training và testing với test_size = 0.3
+
 {% highlight ruby %}
 from sklearn.model_selection import train_test_split
 X = image.reshape((5000,-1))
@@ -144,4 +145,4 @@ for i in range(len(X_test)):
     IOU.append(iou)
 np.mean(IOU)
 ~~~
-* Ta tính được mean cua IOU `0.79` tức 79% tương đối tốt, chúng ta có thể cải thiện model bằng một số cách như : normalizer data trước khi training, thay đổi số node trên mỗi layer hoặc thay đổi active fuction.
+* Ta tính được mean cua IOU `0.79` tức 79% tương đối tốt, chúng ta có thể cải thiện model bằng một số cách như : normalizer data trước khi training, thay đổi số node trên mỗi layer hoặc thay đổi active fuction
