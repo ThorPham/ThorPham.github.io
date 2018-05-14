@@ -68,12 +68,13 @@ tin quan trọng từ data,phát hiện và loại bỏ outlier và giảm chi�
 * Chúng ta có thể tự xây dựng model hoặc dùng thư viện có sẵn trong opencv chẳng hạn:
 * Data set bộ data 2k image 12 ca sỹ việt nam đã aligmnet
 * Code với sklearn :
+
 ~~~ ruby
 import numpy as np
 import os
 import glob
 import cv2
---->get data and precessing
+
 names = ["bao thy","chi pu","dam vinh hung","dan truong","ha anh tuan","ho ngoc ha",
          "huong tram","lam truong","my tam","No phuoc thing","son tung","tuan hung"]
 name_index = {name:index for index,name in enumerate(names)}
