@@ -68,8 +68,7 @@ tin quan trọng từ data,phát hiện và loại bỏ outlier và giảm chi�
 * Chúng ta có thể tự xây dựng model hoặc dùng thư viện có sẵn trong opencv chẳng hạn:
 * Data set bộ data 2k image 12 ca sỹ việt nam đã aligmnet
 * Code với sklearn :
-
-~~~ ruby
+{% highlight ruby %}
 import numpy as np
 import os
 import glob
@@ -104,7 +103,7 @@ svm = SVC(C=10)
 svm.fit(X_train,y_train)
 y_pre = svm.predict(X_test)
 print(accuracy_score(y_test,y_pre))
-~~~
+{% endhighlight %}
 * Accuarcy chỉ có 62% thôi ha. Tương đối thấp vì PCA là 1 feature extraction dạng shadow learning nên feature chỉ làm việc tốt đối với
 những image có sự khác biệt lớn về structer and texture như chó mèo.. Còn face thì khó hơn ta có thể dùng các kỹ thuật feature của deep
 learning để training. Bạn có thể đọc ở bài face veritication.
