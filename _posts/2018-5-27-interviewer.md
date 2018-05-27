@@ -58,4 +58,8 @@ redirect_from:
 * 43,Explain main ideas behind ResNet? Why would you try ResNet over other architectures?
 * 44, Explain batch gradient descent, stochastic gradient descent and mini-match gradient descent.
 * 45, Explain Dropout and Batch Normalization. Why BN helps in faster convergence?
-* 46 , 
+* 46, What is the difference between K-means and EM?
+* 47, What is an auto-encoder?
+* 48, What is exploding gradients ?
+* 49, What is a confusion matrix ?
+* 50, What is an imbalanced dataset? How is it handled?
