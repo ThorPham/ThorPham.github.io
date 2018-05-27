@@ -49,4 +49,13 @@ redirect_from:
 * 35, How is a decision tree pruned?
 * 36, Which is more important to you– model accuracy, or model performance?
 * 37, What’s the F1 score? How would you use it?
-* 38, 
+* 37,Explain max un-pooling operation for increasing the resolution of feature maps.
+* 38,What is a Learnable up-sampling or Transpose convolution ?
+* 39,Describe the transition between R-CNN, Fast R-CNN and Faster RCNN for object detection.
+* 40,Describe how RPNs are trained for prediction of region proposals in Faster R-CNN?
+* 41,Describe the approach in SSD and YOLO for object detection. How these approaches differ from Faster-RCNN. When will you use one over the other?
+* 42,Difference between Inception v3 and v4. How does Inception Resnet compare with V4.
+* 43,Explain main ideas behind ResNet? Why would you try ResNet over other architectures?
+* 44, Explain batch gradient descent, stochastic gradient descent and mini-match gradient descent.
+* 45, Explain Dropout and Batch Normalization. Why BN helps in faster convergence?
+* 46 , 
