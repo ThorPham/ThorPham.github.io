@@ -14,7 +14,7 @@ redirect_from:
   của thuật toán này.
 * 2, Tell me about naive bayes classifier ?
   * Naive bayes classifier dựa trên công thức bayes: $ P(a/b) = \frac{P(a\cap b)P(a)}{P(b)}$.Hiểu một cách đơn giản hơn
-  $ posterior = \frac{likehood.prior}{evident} $
+  $ posterior = \frac{likehood x prior}{evident} $
   * Giả sử có 2 class (c1,c2), thì hiểu một cách đơn giản naive bayes là ta tìm xác suất của $P(c1/b)$,$P(c2/b)$ rồi so sánh 2 xác suất này xem cái nào lớn hơn thì sẽ thuộc về class đó. Vì P(b) là như nhau nên ta chỉ cần tính $P(a\cap b)$ và $P(a)$
 * 3, Explain TF-IDF ?
   * TF-IDF nó là viết tắt của từ Term frequency invert document frequency.Nó là một kỹ thuật feature extraction dùng trong text mining và information retrieval. Trước khi có tf-idf người ta dùng one-hot-encoding để embedding words sang vector. Nhưng kỹ thuật này gặp một số hạn chế là :
@@ -39,8 +39,8 @@ $$ </div>
   * Như chúng ta đã biết máy tính được cấu tạo từ những con số, do đó nó chỉ có thể đọc được dữ liệu số mà thôi. Trong natural language processing thì để xử lý dữ liệu text chúng ta cũng phải chuyển dữ liệu từ text sang numeric, tức là đưa nó vào một không gian mới người ta thường gọi là embbding. Trước đây người ta mã hóa theo kiểu one hot encoding tức là tạo một vocabualary cho dữ liệu và mã hóa các word trong document thành những vectoc, nếu word đó có trong document thì mã hóa là 1 còn không có sẽ là 0. Kết quả tạo ra một sparse matrix, tức là matrix hầu hết là 0.Các mã hóa này có nhiều nhược điểm đó là thứ nhất là số chiều của nó rất lớn (NxM, N là số document còn M là số vocabulary), thứ 2 các word không có quan hệ với nhau. Điều đó dẫn đến người ta nghĩ ra một model mới có tên là Word embbding, ở đó các word sẽ có quan hệ với nhau về semantic tức là ví dụ như paris-tokyo,man-women,boy-girl những cặp từ này sẽ có khoảng cách gần nhau hơn trong Word embbding space. Ví dụ điển hình mà ta thây đó là phương trình king - queen = man - women . Cái ưu điểm thứ 2 là số chiều của nó sẽ giảm chỉ còn NxD. Word embbding có 2 model nổi tiếng là word2vec và Glove.
   * Word2vec được tạo ra năm 2013 bởi một kỹ sư ở google có tên là Tomas Mikolov. Nó là một model unsupervised learning,được training từ  large corpus. Word2vec có 2 model là skip-gram và Cbow.
   * Skip-gram model là model predict word surrounding khi cho một từ cho trước, ví dụ như text = "I love you so much". Khi dùng 1 window search có size 3 ta thu được : {(i,you),love},{(love,so),you},{(you,much),so}. Nhiệm vụ của nó là khi cho 1 từ center ví dụ là love thì phải predict các từ xung quang là i, you.
-  * Cbow là viết tắt của continous bag of word . Model này ngược với model skip-gram tức là cho những từ surrounding predict word current.
-  * Trong thực tế người ta chỉ chọn một trong 2 model để training, Cbow thì training nhanh hơn nhưng độ chính xác không cao bằng skip-gram và ngược lại
+    * Cbow là viết tắt của continous bag of word . Model này ngược với model skip-gram tức là cho những từ surrounding predict word current.
+    * Trong thực tế người ta chỉ chọn một trong 2 model để training, Cbow thì training nhanh hơn nhưng độ chính xác không cao bằng skip-gram và ngược lại
 * 5, How does SVM learns non-linear boundaries ? Explain.
 * 6, What is precision and recall ? Which one of this do you think is important in medical diagnosis ?
 * 7, Define precision and recall ?
@@ -54,7 +54,33 @@ $$ </div>
 * 15, Can you tell DB-SCAN algorithm ?
 * 16, How does HAC (Hierarchical Agglomerative clustering) work ?
 * 17, Explain PCA ? Tell me the mathematical steps to implement PCA ?
+  * PCA là một trong những phương pháp giảm chiều dữ liệu ( Dimensionality reduction techniques ) phổ biến và được sử dụng trong nhiều lĩnh vực khác nhau. PCA có nhiều ứng dụng như tìm mối tương quan giữa các biến ( relationship between observation), trích xuất những thông tin quan trọng từ data, phát hiện và loại bỏ outlier và giảm chiều chiều dữ liệu.Ý tưởng của phương pháp PCA là tìm ra một không gian mới để chiếu(project) data sao cho variation giữ lại là nhiều nhất.
+  *  Có 2 phương pháp tiếp cận PCA là covarian matrix và SVD .
+  * Phương pháp Covarian matrix : Các bước thực hiện thuật toán như sau :
+ ![pca](/assets/images/pca.jpg)
+ 
+    * X data có chiều MxN ( với N là số sample ,M là số feature).
+    * Tính mean của X :
+  $$
+  \mu = \frac{1}{N}\cdot\sum_{i=1}^{N}x_{i}
+  $$
+    * Trừ X với mean của X :
+  $$
+  D = \{d_{1},d_{2},..,d_{N}\} = \sum_{i=1}^{N}x_{i} - \mu
+  $$
+    * Tính toán covarian :
+    $$
+    \sum = \frac{1}{N-1}\cdot D\cdot D^{T}
+    $$
+    * Tính toán EigenVector **V** và EigenValue $\lambda$ của Covarian $\sum$
+    * Sort EigenValue tương ứng với EigenVector theo thứ tự $\lambda$ giảm dần .
+    * Chọn những EigenVector tương ứng với EigenValue lớn nhất $ W = \{v_{1},v_{2},..v_{k}\} $ . EigenVector W sẽ làm đại diện để project X vào PCA space
+    * Tất cả sample X sẽ được project vào không gian nhỏ hơn theo công thưc $Y = W^{T}\cdot D$
 * 18, What is disadvantage of using PCA ?
+  * PCA chỉ xem xét trên global data không quan tâm đến local data( ngược lại với Tsne). Nó chỉ có một số limit trong giả định khi thực hiện thuật toán là :
+    * Linearity : PCA giải định các principle components là linear combination
+    * Large variance implies more structure : PCA sử dụng variace làm thước đo cho principle components, high variace thì principle components càng quan trong, low variace được xem như noise.
+    * Orthogonality : Các principle components là Orthogonality với nhau.
 * 19, How does CNN work ? Explain the implementation details ?
 * 20, What is the range of sigmoid function ?
 * 21, What is mean and variance of standard normal distribution ?
