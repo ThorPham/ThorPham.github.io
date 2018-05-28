@@ -3,6 +3,7 @@ layout: post
 title: "Một số câu hỏi interviewer AI,Deep learning,machine learning"
 description: "Một số câu hỏi interviewer AI,Deep learning,machine learning"
 categories: [computer_vision]
+publisher = false
 tags: [computer_vision,python]
 redirect_from:
   - /2018/04/22/
@@ -13,9 +14,32 @@ redirect_from:
   cụm từ "bóng đá". Trên thực tế điều này không đúng ha vì 2 cụm từ này có mối quan hệ tương đối mật thiết với nhau. Đây cũng là một nhược điểm
   của thuật toán này.
 * 2, Tell me about naive bayes classifier ?
-  * Naive bayes classifier dựa trên công thức bayes: $ P(a/b) = \frac{P(a\cap b)P(a)}{P(b)}$. Giả sử có 2 class (c1,c2), thì hiểu một cách đơn giản naive bayes là ta tìm xác suất của $P(c1/b)$,$P(c2/b)$ rồi so sánh 2 xác suất này xem cái nào lớn hơn thì sẽ thuộc về class đó. Vì P(b) là như nhau nên ta chỉ cần tính #P(a\cap b)# và $P(a)$
+  * Naive bayes classifier dựa trên công thức bayes: $ P(a/b) = \frac{P(a\cap b)P(a)}{P(b)}$. Giả sử có 2 class (c1,c2), thì hiểu một cách đơn giản naive bayes là ta tìm xác suất của $P(c1/b)$,$P(c2/b)$ rồi so sánh 2 xác suất này xem cái nào lớn hơn thì sẽ thuộc về class đó. Vì P(b) là như nhau nên ta chỉ cần tính $P(a\cap b)$ và $P(a)$
 * 3, Explain TF-IDF ?
+ TF-IDF nó là viết tắt của từ Term frequency invert document frequency.Nó là một kỹ thuật feature extraction dùng trong text mining và information retrieval. Trước khi có tf-idf người ta dùng one-hot-encoding để embedding words sang vector. Nhưng kỹ thuật này gặp một số hạn chế là :
+  * Những từ thường xuyên xuất hiện sẽ không có nhiều thông tin nhưng vẫn có tỉ trọng(weight) ngang với các từ khác.vd : stop word chẳng hạn hay chúng ta phân tích vềquán ăn nào đó thì từ "quán ăn" xuất hiện ở tất cả document.Chúng ta cần giảm tỉ trọng về mặt thông tin nó  xuống vì thông tin không mang nhiều giá trị.
+  * Những từ hiếm(rare word) or key word không có sự khác biệt về tỉ trọng thông tin
+* Để khắc phục hạn chế này tf-idf đã ra đời.Tf-idf bao gồm 2 thành phần là tf(term frequency) và idf(inverse document frequency)
+<div style="text-align: center"> $$
+tf(w,d) = \frac{\text{number of word w in document d}}{\text{total word in document}}
+$$ </div>
+* tf đo lường tỉ trọng tần suất từ w có trong document d.Vì document thường có lenght khác nhau nên để normalization ta chia nó cho number word trong document d.
+<div style="text-align: center"> $$
+idf = tf* \frac{N}{\text{documnet in word w appear}}
+$$ </div>
+* N là tổng số document trong dataset.Tỉ số $\frac{N}{\text{documnet in word w appear}}$ được xem là inverse document frequency. Nếu một từ xuất hiện nhiều ở các document thì tỉ số này sẽ gần 1.Và ngược lại một từ ít xuất hiện hơn tỉ số này sẽ cao hơn 1. Điều này giúp giảm tỉ trọng của 
+những từ thường xuyên suất hiện và tăng tỉ trọng những từ ít xuất hiện trong document hơn (lưu ý N luôn lớn hơn hoặc bằng documnet in word w appear).
+* Một vấn đề là khi N rất lớn mà `documnet in word w appear` rất nhỏ thì tỉ số này rất lơn cho nên là người dùng log transform để giảm giá trị tỉ số $\frac{N}{documnet in word w appear}$ tránh gây khó khăn trong việc tính toán ( lưu ý log nó làm giảm giá trị theo cấp lũy thừa). Khi đó công thức idf cuối cùng sẽ là 
+<div style="text-align: center "> $$
+idf = tf* log(\frac{N}{\text{documnet in word w appear}})
+$$ </div>
+* Ví dụ : Một document 100 word chứa word cat 3 lần. $ tf = \frac{3}{100} = 0.03 $ . Giả sử có 10000 document mà word cat xuất hiện trong 1000 document. $ idf(cat) = 0.03* log(\frac{10000}{1000}) = 0.06 $
 * 4, What are word2vec vectors?
+Như chúng ta đã biết máy tính được cấu tạo từ những con số, do đó nó chỉ có thể đọc được dữ liệu số mà thôi. Trong natural language processing thì để xử lý dữ liệu text chúng ta cũng phải chuyển dữ liệu từ text sang numeric, tức là đưa nó vào một không gian mới người ta thường gọi là embbding. Trước đây người ta mã hóa theo kiểu one hot encoding tức là tạo một vocabualary cho dữ liệu và mã hóa các word trong document thành những vectoc, nếu word đó có trong document thì mã hóa là 1 còn không có sẽ là 0. Kết quả tạo ra một sparse matrix, tức là matrix hầu hết là 0.Các mã hóa này có nhiều nhược điểm đó là thứ nhất là số chiều của nó rất lớn (NxM, N là số document còn M là số vocabulary), thứ 2 các word không có quan hệ với nhau. Điều đó dẫn đến người ta nghĩ ra một model mới có tên là Word embbding, ở đó các word sẽ có quan hệ với nhau về semantic tức là ví dụ như paris-tokyo,man-women,boy-girl những cặp từ này sẽ có khoảng cách gần nhau hơn trong Word embbding space. Ví dụ điển hình mà ta thây đó là phương trình king - queen = man - women . Cái ưu điểm thứ 2 là số chiều của nó sẽ giảm chỉ còn NxD. Word embbding có 2 model nổi tiếng là word2vec và Glove.
+  Word2vec được tạo ra năm 2013 bởi một kỹ sư ở google có tên là Tomas Mikolov. Nó là một model unsupervised learning,được training từ  large corpus. Word2vec có 2 model là skip-gram và Cbow.
+Skip-gram model là model predict word surrounding khi cho một từ cho trước, ví dụ như text = "I love you so much". Khi dùng 1 window search có size 3 ta thu được : {(i,you),love},{(love,so),you},{(you,much),so}. Nhiệm vụ của nó là khi cho 1 từ center ví dụ là love thì phải predict các từ xung quang là i, you.
+Cbow là viết tắt của continous bag of word . Model này ngược với model skip-gram tức là cho những từ surrounding predict word current.
+Trong thực tế người ta chỉ chọn một trong 2 model để training, Cbow thì training nhanh hơn nhưng độ chính xác không cao bằng skip-gram và ngược lại
 * 5, How does SVM learns non-linear boundaries ? Explain.
 * 6, What is precision and recall ? Which one of this do you think is important in medical diagnosis ?
 * 7, Define precision and recall ?
