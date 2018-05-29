@@ -42,6 +42,8 @@ $$ </div>
     * Cbow là viết tắt của continous bag of word . Model này ngược với model skip-gram tức là cho những từ surrounding predict word current.
     * Trong thực tế người ta chỉ chọn một trong 2 model để training, Cbow thì training nhanh hơn nhưng độ chính xác không cao bằng skip-gram và ngược lại
 * 5, How does SVM learns non-linear boundaries ? Explain.
+  * Khi dữ liệu non-linear thì không tìm được 1 mặt phẳng nào tối ưu để classifier nên người ta nghĩ ra dùng 1 kernel như 1 function map
+  data ban đầu sang không gian mới mà ở đây có thể tìm được mặt phẳng tối ưu để classifier
 * 6, What is precision and recall ? Which one of this do you think is important in medical diagnosis ?
   * Giả sử chúng ta có một cái máy chuẩn đoán bệnh cancer như hình dưới :
   ![recal](/assets/images/recall.jpg)
@@ -50,7 +52,10 @@ $$ </div>
 * 7, Define precision and recall ?
 * 8, What is random about Random Forest ?
   * Chúng ta biết random forest là một thuật toán ensemble method. Nó kết hợp nhiều thuật decision tree lại thành 1 rừng(forest). Random trong random forest có nghĩa là mỗi lần lấy data cho decision tree nó sẽ random một sample từ data training, random có thể là sample instance hoặc feature, và cũng có thể cả 2.
-* 9, What are the criteria for splitting at a node in decision trees ?
+* 9, What are the criteria for splitting at a node in decision trees ? 
+  * Một số criteria để plit node trong decission tree là :
+    * Gini impurity : $ \sum_k{\neg 1}(p_{k} = 1 - p_{i} $
+    * Entropy : $ -\sum_{i=1}^{J}p_{i}log(p_{i}) $
 * 10, What is the advantage with random forest ?
   * Có 2 advantage đó là :
     * Giảm overfiting : 
