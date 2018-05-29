@@ -45,8 +45,8 @@ $$ </div>
 * 6, What is precision and recall ? Which one of this do you think is important in medical diagnosis ?
   * Giả sử chúng ta có một cái máy chuẩn đoán bệnh cancer như hình dưới :
   ![recal](/assets/images/recall.jpg)
-    * Precision được định nghĩa là : $ precision = \ frac{TP}{TP + FP} $. Tỉ lệ máy chuẩn đoán số người bị bệnh ung thư trên thực tế người đó bị ung thư thật sự. Hiểu đơn giản hơn là accuracy của cái máy đoán bệnh ung thư. $precision = \ frac{10}{15} = 66% $
-    * Recall  được định nghĩa là : $ Recall = \ frac{TP}{TP + FN} $ Tỉ lệ người bị cancer được máy chuẩn đoán đúng trên số người bị bệnh cancer. Hiểu đơn giản là accuracy của cái máy chỉ xét trên số người thực sự bị cancer : $precision = \ frac{10}{14} = 71% $
+    * Precision được định nghĩa là : $ precision = \frac{TP}{TP + FP} $. Tỉ lệ máy chuẩn đoán số người bị bệnh ung thư trên thực tế người đó bị ung thư thật sự. Hiểu đơn giản hơn là accuracy của cái máy đoán bệnh ung thư. $precision = \frac{10}{15} = 66% $
+    * Recall  được định nghĩa là : $ Recall = \frac{TP}{TP + FN} $ Tỉ lệ người bị cancer được máy chuẩn đoán đúng trên số người bị bệnh cancer. Hiểu đơn giản là accuracy của cái máy chỉ xét trên số người thực sự bị cancer : $precision = \frac{10}{14} = 71% $
 * 7, Define precision and recall ?
 * 8, What is random about Random Forest ?
   * Chúng ta biết random forest là một thuật toán ensemble method. Nó kết hợp nhiều thuật decision tree lại thành 1 rừng(forest). Random trong random forest có nghĩa là mỗi lần lấy data cho decision tree nó sẽ random một sample từ data training, random có thể là sample instance hoặc feature, và cũng có thể cả 2.
