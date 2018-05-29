@@ -43,10 +43,18 @@ $$ </div>
     * Trong thực tế người ta chỉ chọn một trong 2 model để training, Cbow thì training nhanh hơn nhưng độ chính xác không cao bằng skip-gram và ngược lại
 * 5, How does SVM learns non-linear boundaries ? Explain.
 * 6, What is precision and recall ? Which one of this do you think is important in medical diagnosis ?
+  * Giả sử chúng ta có một cái máy chuẩn đoán bệnh cancer như hình dưới :
+  ![recal](/assets/images/recall.jpg)
+    * Precision được định nghĩa là : $ precision = \ frac{TP}{TP + FP} $. Tỉ lệ máy chuẩn đoán số người bị bệnh ung thư trên thực tế người đó bị ung thư thật sự. Hiểu đơn giản hơn là accuracy của cái máy đoán bệnh ung thư. $precision = \ frac{10}{15} = 66% $
+    * Recall  được định nghĩa là : $ Recall = \ frac{TP}{TP + FN} $ Tỉ lệ người bị cancer được máy chuẩn đoán đúng trên số người bị bệnh cancer. Hiểu đơn giản là accuracy của cái máy chỉ xét trên số người thực sự bị cancer : $precision = \ frac{10}{14} = 71% $
 * 7, Define precision and recall ?
 * 8, What is random about Random Forest ?
+  * Chúng ta biết random forest là một thuật toán ensemble method. Nó kết hợp nhiều thuật decision tree lại thành 1 rừng(forest). Random trong random forest có nghĩa là mỗi lần lấy data cho decision tree nó sẽ random một sample từ data training, random có thể là sample instance hoặc feature, và cũng có thể cả 2.
 * 9, What are the criteria for splitting at a node in decision trees ?
 * 10, What is the advantage with random forest ?
+  * Có 2 advantage đó là :
+    * Giảm overfiting : 
+    * Giảm variance :
 * 11, Tell me about boosting algorithms ?
 * 12, How does gradient boosting works ?
 * 13, What are the kernels used in SVM ? What is the optimization technique of SVM ?
@@ -91,7 +99,7 @@ $$ </div>
 * 26, Explain the intuition behind BIC or AIC ?
 * 27, What’s the trade-off between bias and variance?
 * 28, What is the difference between supervised and unsupervised machine learning?
-* 29,  How is KNN different from k-means clustering?
+* 29, How is KNN different from k-means clustering?
 * 30, Explain how a ROC curve works.
 * 31, Explain the difference between L1 and L2 regularization.
 * 32, What’s the difference between Type I and Type II error?
