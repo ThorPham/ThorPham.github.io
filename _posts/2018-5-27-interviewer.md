@@ -104,9 +104,11 @@ $$ </div>
 * 31, Explain the difference between L1 and L2 regularization.
 * 32, What’s the difference between Type I and Type II error?
 * 33, What’s the difference between probability and likelihood?
+  * Hiểu một cách đơn giản probability function $ F(x\\theta)$ khi bạn biết tham số của hàm probability function thì bạn có thể xác định được tất cả các observation trên phân phối đó ( vd phân phôi chuẩn được qui định bởi 2 tham số là mu và sigma (3,0.4)). Còn hàm likehood
+  $ F(\theta\x)$ thì ngược lại khi bạn có một số quan sát nhưng bạn chưa biết được tham số của hàm phân phối xác xuất bạn muốn ước lượng các tham số này.
 * 34, What’s the difference between a generative and discriminative model?
 * 35, How is a decision tree pruned?
-* 36, Which is more important to you– model accuracy, or model performance?
+* 36, Which is more important to your model accuracy, or model performance?
 * 37, What’s the F1 score? How would you use it?
 * 37,Explain max un-pooling operation for increasing the resolution of feature maps.
 * 38,What is a Learnable up-sampling or Transpose convolution ?
