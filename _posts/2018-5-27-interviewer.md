@@ -55,7 +55,7 @@ $$ </div>
 * 9, What are the criteria for splitting at a node in decision trees ? 
   * Một số criteria để plit node trong decission tree là :
     * Gini impurity : $ \sum_k{\neg 1}(p_{k} = 1 - p_{i} $
-    * Entropy : $ -\sum_{i=1}^{J}p_{i}log(p_{i}) $
+    * Entropy : $ -\sum_{i=1}^{J}p_{i}log(p_{i}) $ . Entropy hiểu đơn giản là so sánh sự tương đồng về phân phối giữa feature và label.
 * 10, What is the advantage with random forest ?
   * Có 2 advantage đó là :
     * Giảm overfiting : 
