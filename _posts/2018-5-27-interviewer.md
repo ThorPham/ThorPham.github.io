@@ -54,12 +54,10 @@ $$ </div>
   * Chúng ta biết random forest là một thuật toán ensemble method. Nó kết hợp nhiều thuật decision tree lại thành 1 rừng(forest). Random trong random forest có nghĩa là mỗi lần lấy data cho decision tree nó sẽ random một sample từ data training, random có thể là sample instance hoặc feature, và cũng có thể cả 2.
 * 9, What are the criteria for splitting at a node in decision trees ? 
   * Một số criteria để plit node trong decission tree là :
-    * Gini impurity : $ \sum_k{\neg 1}(p_{k} = 1 - p_{i} $
+    * Gini impurity : $ \sum_k{\neg 1}(p_{k}) = 1 - p_{i} $
     * Entropy : $ -\sum_{i=1}^{J}p_{i}log(p_{i}) $ . Entropy hiểu đơn giản là so sánh sự tương đồng về phân phối giữa feature và label.
 * 10, What is the advantage with random forest ?
-  * Có 2 advantage đó là :
-    * Giảm overfiting : 
-    * Giảm variance :
+  * Có 2 advantage đó là :Giảm overfiting và giảm variance :
 * 11, Tell me about boosting algorithms ?
 * 12, How does gradient boosting works ?
 * 13, What are the kernels used in SVM ? What is the optimization technique of SVM ?
@@ -96,6 +94,7 @@ $$ </div>
     * Orthogonality : Các principle components là Orthogonality với nhau.
 * 19, How does CNN work ? Explain the implementation details ?
 * 20, What is the range of sigmoid function ?
+  * Range sigmiod fucntion là (0,1)
 * 21, What is mean and variance of standard normal distribution ?
 * 22, Which model would you use in case of unbalanced dataset: Random Forest or Boosting ? Why ?
 * 23, What are Lasso and Ridge regression ?
@@ -104,10 +103,13 @@ $$ </div>
 * 26, Explain the intuition behind BIC or AIC ?
 * 27, What’s the trade-off between bias and variance?
 * 28, What is the difference between supervised and unsupervised machine learning?
+  * Supervised learning là thuật toán ta biết trước label có 2 dạng là classifier và regression. Trong khi đó unsupervised là thuật toán
+  ta không biết trước được lable, cũng có 2 dạng là dimession reduction và cluster.
 * 29, How is KNN different from k-means clustering?
   * KNN là thuật toán supervised trong khi đó k-means là thuật toán unsupervised. K trong KNN thường là 1 số lẻ để xác định observation thuộc class nào bằng cách tình khoảng cách giữa obveration đó tới các observation còn lại của data. Trong khi đó k trong k-means là số cluster trên dataset.
 * 30, Explain how a ROC curve works.
-  * ROC curve là một biểu đồ dựa trên các threshold để biểu diễn true positive rate (TPR) và false positive rate (FPR).Ứng với mỗi threshod sẽ là một giá trị TPR và FPR. Trong ML nó dùng để đánh giá một thuật toán có tốt hay không. Có thể hình dung như biểu đồ dưới,mỗi negative và positive là một phân bố xác suất. Một thuật toán làm việc tốt khi 2 phân bố này cách xa nhau và giao thoa giữa 2 phân bố này không quá lớn.
+  * ROC curve là một biểu đồ dựa trên các threshold để biểu diễn true positive rate (TPR) và false positive rate (FPR).Ứng với mỗi threshod sẽ là một giá trị TPR và FPR. Trong ML nó dùng để đánh giá một thuật toán có tốt hay không. Có thể hình dung như biểu đồ dưới,mỗi negative và positive là một phân bố xác suất. Một thuật toán làm việc tốt khi 2 phân bố này cách xa nhau và giao thoa giữa 2 phân bố này không quá lớn.Khi đó biểu đồ ROC càng xa đường chéo.
+  ![roc](/assets/images/roc.jpg)
 * 31, Explain the difference between L1 and L2 regularization.
 * 32, What’s the difference between Type I and Type II error?
 * 33, What’s the difference between probability and likelihood?
