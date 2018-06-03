@@ -14,7 +14,7 @@ redirect_from:
   của thuật toán này.
 * 2, Tell me about naive bayes classifier ?
   * Naive bayes classifier dựa trên công thức bayes: $ P(a/b) = \frac{P(a\cap b)P(a)}{P(b)}$.Hiểu một cách đơn giản hơn
-  $ posterior = \frac{likehood x prior}{evident} $
+  $ posterior = \frac{(Likehood) x (Prior)}{Evident} $
   * Giả sử có 2 class (c1,c2), thì hiểu một cách đơn giản naive bayes là ta tìm xác suất của $P(c1/b)$,$P(c2/b)$ rồi so sánh 2 xác suất này xem cái nào lớn hơn thì sẽ thuộc về class đó. Vì P(b) là như nhau nên ta chỉ cần tính $P(a\cap b)$ và $P(a)$
 * 3, Explain TF-IDF ?
   * TF-IDF nó là viết tắt của từ Term frequency invert document frequency.Nó là một kỹ thuật feature extraction dùng trong text mining và information retrieval. Trước khi có tf-idf người ta dùng one-hot-encoding để embedding words sang vector. Nhưng kỹ thuật này gặp một số hạn chế là :
