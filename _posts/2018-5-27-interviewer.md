@@ -109,7 +109,7 @@ $$ </div>
   * KNN là thuật toán supervised trong khi đó k-means là thuật toán unsupervised. K trong KNN thường là 1 số lẻ để xác định observation thuộc class nào bằng cách tình khoảng cách giữa obveration đó tới các observation còn lại của data. Trong khi đó k trong k-means là số cluster trên dataset.
 * 30, Explain how a ROC curve works.
   * ROC curve là một biểu đồ dựa trên các threshold để biểu diễn true positive rate (TPR) và false positive rate (FPR).Ứng với mỗi threshod sẽ là một giá trị TPR và FPR. Trong ML nó dùng để đánh giá một thuật toán có tốt hay không. Có thể hình dung như biểu đồ dưới,mỗi negative và positive là một phân bố xác suất. Một thuật toán làm việc tốt khi 2 phân bố này cách xa nhau và giao thoa giữa 2 phân bố này không quá lớn.Khi đó biểu đồ ROC càng xa đường chéo.
-  ![roc](/assets/images/ROC.jpg)
+![roc](/assets/images/ROC.jpg)
 * 31, Explain the difference between L1 and L2 regularization.
 * 32, What’s the difference between Type I and Type II error?
 * 33, What’s the difference between probability and likelihood?
