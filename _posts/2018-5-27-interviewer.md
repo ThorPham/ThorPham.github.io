@@ -41,10 +41,10 @@ $$ </div>
     * Skip-gram model là model predict word surrounding khi cho một từ cho trước, ví dụ như text = "I love you so much". Khi dùng 1 window search có size 3 ta thu được : {(i,you),love},{(love,so),you},{(you,much),so}. Nhiệm vụ của nó là khi cho 1 từ center ví dụ là love thì phải predict các từ xung quang là i, you.
     * Cbow là viết tắt của continous bag of word . Model này ngược với model skip-gram tức là cho những từ surrounding predict word current.
     * Trong thực tế người ta chỉ chọn một trong 2 model để training, Cbow thì training nhanh hơn nhưng độ chính xác không cao bằng skip-gram và ngược lại
-* 5, How does SVM learns non-linear boundaries ? Explain.
+* 5, How does SVM learns non-linear boundaries ?
   * Khi dữ liệu non-linear thì không tìm được 1 mặt phẳng nào tối ưu để classifier nên người ta nghĩ ra dùng 1 kernel như 1 function map
   data ban đầu sang không gian mới mà ở đây có thể tìm được mặt phẳng tối ưu để classifier
-* 6, What is precision and recall ? Which one of this do you think is important in medical diagnosis ?
+* 6, What is precision and recall ? 
   * Giả sử chúng ta có một cái máy chuẩn đoán bệnh cancer như hình dưới :
   ![recal](/assets/images/recall.jpg)
     * Precision được định nghĩa là : $ precision = \frac{TP}{TP + FP} $. Tỉ lệ máy chuẩn đoán số người bị bệnh ung thư trên thực tế người đó bị ung thư thật sự. Hiểu đơn giản hơn là accuracy của cái máy đoán bệnh ung thư. $precision = \frac{10}{15} = 66% $
@@ -105,11 +105,13 @@ $$ </div>
 * 27, What’s the trade-off between bias and variance?
 * 28, What is the difference between supervised and unsupervised machine learning?
 * 29, How is KNN different from k-means clustering?
+  * KNN là thuật toán supervised trong khi đó k-means là thuật toán unsupervised. K trong KNN thường là 1 số lẻ để xác định observation thuộc class nào bằng cách tình khoảng cách giữa obveration đó tới các observation còn lại của data. Trong khi đó k trong k-means là số cluster trên dataset.
 * 30, Explain how a ROC curve works.
+  * ROC curve là một biểu đồ dựa trên các threshold để biểu diễn true positive rate (TPR) và false positive rate (FPR).Ứng với mỗi threshod sẽ là một giá trị TPR và FPR. Trong ML nó dùng để đánh giá một thuật toán có tốt hay không. Có thể hình dung như biểu đồ dưới,mỗi negative và positive là một phân bố xác suất. Một thuật toán làm việc tốt khi 2 phân bố này cách xa nhau và giao thoa giữa 2 phân bố này không quá lớn.
 * 31, Explain the difference between L1 and L2 regularization.
 * 32, What’s the difference between Type I and Type II error?
 * 33, What’s the difference between probability and likelihood?
-  * Hiểu một cách đơn giản probability function $ F(x\\theta)$ khi bạn biết tham số của hàm probability function thì bạn có thể xác định được tất cả các observation trên phân phối đó ( vd phân phôi chuẩn được qui định bởi 2 tham số là mu và sigma (3,0.4)). Còn hàm likehood
+  * Hiểu một cách đơn giản probability function $ F(x\\theta)$ khi bạn biết tham số của hàm probability function thì bạn có thể xác định được tất cả các observation trên phân phối đó ( vd phân phôi chuẩn được qui định bởi 2 tham số là mu và sigma ). Còn hàm likehood
   $ F(\theta\x)$ thì ngược lại khi bạn có một số quan sát nhưng bạn chưa biết được tham số của hàm phân phối xác xuất bạn muốn ước lượng các tham số này.
 * 34, What’s the difference between a generative and discriminative model?
 * 35, How is a decision tree pruned?
