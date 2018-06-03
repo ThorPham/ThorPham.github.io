@@ -98,6 +98,7 @@ $$ </div>
 * 21, What is mean and variance of standard normal distribution ?
 * 22, Which model would you use in case of unbalanced dataset: Random Forest or Boosting ? Why ?
 * 23, What are Lasso and Ridge regression ?
+  * Để hạn chế overfiting trên regression người ta dùng regularization để phạt những hệ số nào quá lớn tác động quá nhiều vào model. LASSO Regression người ta sử dụng L1 regulariztion trong khi đó Ridge thì sử dụng L2. Với L1,L2 là norn của các hệ số hồi qui.
 * 24, What is Gaussian Mixture model ? How does it perform clustering ?
 * 25, How is Expectation Maximization performed ? Explain both the steps ?
 * 26, Explain the intuition behind BIC or AIC ?
@@ -106,7 +107,7 @@ $$ </div>
   * Supervised learning là thuật toán ta biết trước label có 2 dạng là classifier và regression. Trong khi đó unsupervised là thuật toán
   ta không biết trước được lable, cũng có 2 dạng là dimession reduction và cluster.
 * 29, How is KNN different from k-means clustering?
-  * KNN là thuật toán supervised trong khi đó k-means là thuật toán unsupervised. K trong KNN thường là 1 số lẻ để xác định observation thuộc class nào bằng cách tình khoảng cách giữa obveration đó tới các observation còn lại của data. Trong khi đó k trong k-means là số cluster trên dataset.
+  * KNN là thuật toán supervised trong khi đó k-means là thuật toán unsupervised. K trong KNN thường là 1 số lẻ để xác định observation thuộc class nào bằng cách tính khoảng cách giữa obveration đó tới các observation còn lại của data và chọn K distance gần nhất. Trong khi đó k trong k-means là số cluster ta xác định trên dataset.
 * 30, Explain how a ROC curve works.
   * ROC curve là một biểu đồ dựa trên các threshold để biểu diễn true positive rate (TPR) và false positive rate (FPR).Ứng với mỗi threshod sẽ là một giá trị TPR và FPR. Trong ML nó dùng để đánh giá một thuật toán có tốt hay không. Có thể hình dung như biểu đồ dưới,mỗi negative và positive là một phân bố xác suất. Một thuật toán làm việc tốt khi 2 phân bố này cách xa nhau và giao thoa giữa 2 phân bố này không quá lớn.Khi đó biểu đồ ROC càng xa đường chéo.
   
@@ -121,6 +122,7 @@ $$ </div>
 * 35, How is a decision tree pruned?
 * 36, Which is more important to your model accuracy, or model performance?
 * 37, What’s the F1 score? How would you use it?
+  * Để kết hợp recall và precission người ta dùng F1 score đó là mean hamonic của recall và precission. F1 score càng cao càng tốt.
 * 37,Explain max un-pooling operation for increasing the resolution of feature maps.
 * 38,What is a Learnable up-sampling or Transpose convolution ?
 * 39,Describe the transition between R-CNN, Fast R-CNN and Faster RCNN for object detection.
